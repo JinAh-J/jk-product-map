@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>잡코리아 기업서비스 상품 맵 v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f5f7;
+  --s1: #ffffff;
+  --s2: #f0f2f6;
+  --s3: #e6e9ef;
+  --bd: #e2e6ee;
+  --bd2: #c8cedc;
+  --t1: #111827;
+  --t2: #374151;
+  --t3: #6b7280;
+  --t4: #9ca3af;
+
+  --main: #dc2626;
+  --max:  #059669;
+  --part: #2563eb;
+  --area: #d97706;
+  --jump: #7c3aed;
+  --spick:#2563eb;
+  --wpick:#7c3aed;
+  --pos:  #d97706;
+  --pkg:  #38bdf8;
+  --ats:  #ea580c;
+  --lrn:  #65a30d;
+  --ass:  #c026d3;
+  --ban:  #e11d48;
+  --ai:   #0891b2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--bg); color: var(--t1); }
+
+/* ── SIDEBAR ── */
+aside {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: 210px;
+  background: var(--s1);
+  border-right: 1px solid var(--bd);
+  overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column;
+  z-index: 100;
+}
+.logo {
+  padding: 18px 16px 14px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  color: var(--t3); border-bottom: 1px solid var(--bd);
+}
+.grp { padding: 16px 10px 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--t4); }
+.ni {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; margin: 1px 6px;
+  border-radius: 6px; border: none; background: none;
+  font-size: 13px; font-weight: 500; color: var(--t3);
+  cursor: pointer; text-align: left; width: calc(100% - 12px);
+  transition: background .15s, color .15s;
+}
+.ni:hover { background: var(--s2); color: var(--t1); }
+.ni.on { background: var(--s3); color: var(--t1); }
+.ni .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.ni .cnt { margin-left: auto; font-size: 11px; padding: 1px 5px; background: var(--s2); color: var(--t4); border-radius: 3px; }
+
+/* ── MAIN ── */
+main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; min-width: 0; }
+
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed; top: 0; left: 210px; right: 0; z-index: 20;
+  background: var(--s1); border-bottom: 1px solid var(--bd);
+  padding: 13px 28px;
+  display: flex; align-items: center; gap: 14px;
+  box-sizing: border-box;
+}
+.topbar h1 { font-size: 16px; font-weight: 700; color: var(--t1); }
+.topbar p  { font-size: 13px; color: var(--t3); margin-top: 1px; }
+.topbar-spacer { flex: 1; }
+.figma-top {
+  font-size: 13px; font-weight: 600; color: var(--part);
+  padding: 6px 16px; border: 1px solid rgba(77,126,255,.25);
+  border-radius: 7px; background: rgba(77,126,255,.08);
+  text-decoration: none; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  line-height: 1; white-space: nowrap; cursor: pointer;
+}
+.figma-top:hover { background: rgba(77,126,255,.18); }
+
+/* ── CONTENT ── */
+.content { padding: 87px 28px 60px; box-sizing: border-box; width: 100%; overflow-x: hidden; }
+.view { display: none; }
+.view.on { display: block; }
+
+/* ── SECTION HEADER ── */
+.sh {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 16px;
+}
+.sh-bar { width: 3px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+.sh-title { font-size: 16px; font-weight: 800; color: var(--t1); }
+.sh-sub { margin-left: 4px; display: inline-flex; align-items: center; gap: 4px; }
+.sh-link {
+  margin-left: auto; font-size: 13px; font-weight: 600; color: var(--part);
+  padding: 9px 16px; border: 1px solid rgba(77,126,255,.25);
+  border-radius: 7px; background: rgba(77,126,255,.08);
+  text-decoration: none; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  line-height: 1; white-space: nowrap; flex-shrink: 0; cursor: pointer;
+}
+.sh-link:hover { background: rgba(77,126,255,.18); }
+
+/* ── PRODUCT BLOCK (wireframe + meta side by side) ── */
+.pb {
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 0; margin-bottom: 20px;
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 12px;
+}
+.pb + .sh { margin-top: 32px; }
+.wf-panel {
+  padding: 20px; border-right: 1px solid var(--bd);
+  background: #f8f9fb;
+  border-radius: 12px 0 0 12px;
+  min-width: 0; overflow: hidden;
+}
+.wf-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  color: var(--t4); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.pb-badge {
+  font-size: 11px; font-weight: 700; padding: 2px 7px;
+  border-radius: 4px;
+}
+.pc-b  { background: rgba(77,126,255,.15);  color: #6a9fff; }
+.mo-b  { background: rgba(0,201,167,.12);   color: #00c9a7; }
+.all-b { background: rgba(176,125,255,.12); color: #b07dff; }
+.wf-row { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; min-width: 0; }
+.wf-panel svg:not(.fig-ico) { max-width: 100%; height: auto; }
+.dev-wrap { display: flex; flex-direction: column; gap: 5px; }
+.dev-lbl { font-size: 12px; color: var(--t4); font-weight: 600; }
+
+/* ── META PANEL ── */
+.mp { padding: 20px; display: flex; flex-direction: column; gap: 14px; border-radius: 0 12px 12px 0; min-width: 0; overflow: hidden; }
+.mp-name { font-size: 16px; font-weight: 800; color: var(--t1); line-height: 1.3; }
+.mp-price { font-size: 13px; color: var(--t3); }
+.mp-price strong { font-size: 16px; font-weight: 700; color: var(--t1); }
+.divider { height: 1px; background: var(--bd); }
+
+/* Exposure table */
+.et { width: 100%; border-collapse: collapse; }
+.et th {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; color: var(--t4);
+  padding: 0 0 6px; text-align: left;
+  border-bottom: 1px solid var(--bd);
+}
+.et td {
+  font-size: 13px; padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  vertical-align: top; line-height: 1.55;
+  color: var(--t2);
+}
+.et tr:last-child td { border-bottom: none; }
+.et .lbl { color: var(--t4); width: 68px; font-size: 12px; }
+.et .val { color: var(--t2); }
+.et .val b { color: var(--t1); font-weight: 600; }
+.et .hl { color: var(--t1); font-weight: 600; }
+
+/* Tag row */
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.tag {
+  font-size: 11px; font-weight: 600; padding: 2px 8px;
+  border-radius: 4px; border: 1px solid;
+}
+
+/* Figma button */
+.fbt {
+  font-size: 13px; font-weight: 600; color: var(--part);
+  padding: 9px 16px; border: 1px solid rgba(77,126,255,.25);
+  border-radius: 7px; background: rgba(77,126,255,.08);
+  text-decoration: none; transition: background .15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  line-height: 1; white-space: nowrap; cursor: pointer; margin-top: auto;
+}
+.fbt:hover { background: rgba(77,126,255,.18); }
+.fig-ico { width: 12px; height: 12px; }
+
+/* addon list */
+.al { list-style: none; }
+.al li {
+  font-size: 12px; color: var(--t3);
+  padding: 3px 0; display: flex; align-items: center; gap: 6px;
+}
+.al li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--t4); flex-shrink: 0; }
+
+/* ── PURCHASE FLOW ── */
+.pf-wrap {
+  margin-top: 28px;
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 22px 24px;
+}
+.pf-title {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; color: var(--t4); margin-bottom: 18px;
+}
+.pf-steps {
+  display: flex; align-items: flex-start; gap: 0;
+  overflow-x: auto; padding-bottom: 4px;
+}
+.pf-step {
+  display: flex; flex-direction: column;
+  align-items: center; flex-shrink: 0;
+  min-width: 110px;
+}
+.pf-node {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; position: relative; z-index: 1;
+  border: 1px solid var(--bd2); background: var(--s2);
+  flex-shrink: 0;
+}
+.pf-step-title {
+  font-size: 13px; font-weight: 700; color: var(--t1);
+  margin-top: 9px; text-align: center; line-height: 1.35;
+}
+.pf-step-sub {
+  font-size: 12px; color: var(--t3);
+  text-align: center; margin-top: 3px; line-height: 1.4;
+}
+.pf-arrow {
+  align-self: flex-start; margin-top: 14px;
+  font-size: 16px; color: var(--t4); padding: 0 4px; flex-shrink: 0;
+}
+
+/* ── NOTE ── */
+.note { display:none; background: #eff6ff; border: 1px solid #bfdbfe;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; color: #1d4ed8;
+  margin-bottom: 20px; line-height: 1.6;
+}
+
+/* ── OVERVIEW GRID (v1 style) ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 28px;
+}
+.overview-card {
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 20px;
+  cursor: pointer; transition: all .18s;
+  border-top: 3px solid transparent;
+}
+.overview-card:hover { transform: translateY(-2px); background: var(--s2); box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.ov-icon { font-size: 26px; margin-bottom: 10px; }
+.ov-name { font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 5px; }
+.ov-sub  { font-size: 12px; color: var(--t3); line-height: 1.55; }
+.ov-trait { margin-top: 10px; font-size: 11px; color: var(--t4); font-weight: 600;
+  display: flex; align-items: center; gap: 5px; }
+.ov-dot  { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.ov-group-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  color: var(--t4); margin: 20px 0 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ov-group-label::after { content: ''; flex: 1; height: 1px; background: var(--bd); }
+
+/* ── EXPOSURE MAP (SVG wrapper in overview) ── */
+.emap {
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 20px; margin-bottom: 24px;
+}
+.emap-title { font-size: 16px; font-weight: 700; text-transform: uppercase; color: var(--t4); margin-bottom: 14px; }
+
+/* scrollbar */
+html { overflow-y: scroll; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media(max-width:900px){
+  aside { position: static; width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; overflow: visible; }
+  main { margin-left: 0; }
+  .pb { grid-template-columns: 1fr; }
+  .overview-grid { grid-template-columns: repeat(2,1fr); }
+  .wf-panel { border-right: none; border-bottom: 1px solid var(--bd); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside>
+  <div class="logo">JK Product Map</div>
+
+  <div class="grp">개요</div>
+  <button class="ni on" onclick="go('ov',this)">
+    <span class="dot" style="background:#4d7eff"></span> 전체
+  </button>
+
+  <div class="grp">채용광고 (CPT)</div>
+  <button class="ni" onclick="go('main',this)">
+    <span class="dot" style="background:var(--main)"></span> 메인 노출
+    <span class="cnt">4종</span>
+  </button>
+  <button class="ni" onclick="go('max',this)">
+    <span class="dot" style="background:var(--max)"></span> [MAX] 직무+지역
+    <span class="cnt">7종</span>
+  </button>
+  <button class="ni" onclick="go('part',this)">
+    <span class="dot" style="background:var(--part)"></span> 직무 단독
+    <span class="cnt">7종</span>
+  </button>
+  <button class="ni" onclick="go('area',this)">
+    <span class="dot" style="background:var(--area)"></span> 지역 단독
+    <span class="cnt">7종</span>
+  </button>
+  <button class="ni" onclick="go('jump',this)">
+    <span class="dot" style="background:var(--jump)"></span> 점프업
+    <span class="cnt">3종</span>
+  </button>
+
+  <div class="grp">인재확보</div>
+  <button class="ni" onclick="go('best',this)">
+    <span class="dot" style="background:var(--best,#f59e0b)"></span> 베스트 채용상품
+  </button>
+  <button class="ni" onclick="go('spick',this)">
+    <span class="dot" style="background:var(--spick)"></span> 스마트픽
+    <span class="cnt">NEW</span>
+  </button>
+  <button class="ni" onclick="go('wpick',this)">
+    <span class="dot" style="background:var(--wpick)"></span> 원픽
+  </button>
+  <button class="ni" onclick="go('pos',this)">
+    <span class="dot" style="background:var(--pos)"></span> 포지션제안
+    <span class="cnt">5종</span>
+  </button>
+
+  <div class="grp">솔루션</div>
+  <button class="ni" onclick="go('pkg',this)">
+    <span class="dot" style="background:var(--pkg)"></span> 기업회원 패키지
+  </button>
+  <button class="ni" onclick="go('ats',this)">
+    <span class="dot" style="background:var(--ats)"></span> ATS · 나인하이어
+  </button>
+  <button class="ni" onclick="go('lrn',this)">
+    <span class="dot" style="background:var(--lrn)"></span> 기업러닝
+  </button>
+  <button class="ni" onclick="go('ass',this)">
+    <span class="dot" style="background:var(--ass)"></span> 인적성 검사
+  </button>
+  <button class="ni" onclick="go('ban',this)">
+    <span class="dot" style="background:var(--ban)"></span> 배너광고
+  </button>
+  <button class="ni" onclick="go('ai',this)">
+    <span class="dot" style="background:var(--ai)"></span> 자소서 AI 분석
+  </button>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main>
+<div class="topbar">
+  <div>
+    <h1 id="ptitle">전체</h1>
+    <p id="psub">노출 위치 · 노출 방식 · 이용 절차 · Figma 연결</p>
+  </div>
+  <div class="topbar-spacer"></div>
+  <a class="figma-top" id="figma-btn" href="https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4066-39&t=nDdZRwiWffequ6SO-1" target="_blank"><img src="https://i.namu.wiki/i/ta8huommWK7kOGH2Ot9sLuazqcGrf1ICZ7XQy2ccGTlwZcSXaf1xn9PoR43cxzx_RapWtkf3YrncyaKa6BRroAcirgQ9wEO247ShVsftXtyh48e2pxyawUbFiZAvtAGyNpvrXWsuLViUm8hjKno_hg.svg" width="13" height="20" style="display:inline-block;vertical-align:middle;margin-right:5px;flex-shrink:0" alt="Figma">Figma 열기</a>
+</div>
+<div class="content">
+
+<!-- ════════ OVERVIEW ════════ -->
+<div class="view on" id="v-ov">
+  <div class="note">💡 각 상품의 <strong>Figma 링크(YOUR_FIGMA_LINK)</strong>를 실제 URL로 교체하세요. 사이드바에서 상품별 노출 위치 와이어프레임을 확인할 수 있습니다.</div>
+
+
+<!-- 채용광고 그룹 -->
+<div class="ov-group-label">채용광고 CPT</div>
+<div class="overview-grid">
+
+  <div class="overview-card" onclick="go('main',null)" style="border-top-color:var(--main)">
+    <div class="ov-icon">📢</div>
+    <div class="ov-name">메인 노출 광고</div>
+    <div class="ov-sub">홈 최상단 풀배너 노출<br>프리미어·VVIP·VIP·Excellent 4종</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--main)"></span>CPT · 기간 과금 · M 풀배너 + PC 고정</div>
+  </div>
+
+  <div class="overview-card" onclick="go('max',null)" style="border-top-color:var(--max)">
+    <div class="ov-icon">🎯</div>
+    <div class="ov-name">[MAX] 직무+지역</div>
+    <div class="ov-sub">직무 리스트 + 지역 리스트 동시 노출<br>7종 · 가장 넓은 도달 범위</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--max)"></span>CPT · 7종 · 직무+지역 동시</div>
+  </div>
+
+  <div class="overview-card" onclick="go('part',null)" style="border-top-color:var(--part)">
+    <div class="ov-icon">📋</div>
+    <div class="ov-name">직무 단독</div>
+    <div class="ov-sub">특정 직종 구직자 집중 노출<br>7종 · 점프업 부가 포함</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--part)"></span>CPT · 직무 리스트만</div>
+  </div>
+
+  <div class="overview-card" onclick="go('area',null)" style="border-top-color:var(--area)">
+    <div class="ov-icon">📍</div>
+    <div class="ov-name">지역 단독</div>
+    <div class="ov-sub">근무지 기반 지역 리스트 노출<br>직무 단독과 동일 구조·가격</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--area)"></span>CPT · 지역 리스트만</div>
+  </div>
+
+  <div class="overview-card" onclick="go('jump',null)" style="border-top-color:var(--jump)">
+    <div class="ov-icon">⬆️</div>
+    <div class="ov-name">점프업</div>
+    <div class="ov-sub">무료 공고를 리스트 최상단으로<br>하루 3·6·12회 분산 재배치</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--jump)"></span>CPT · 부가 단독 이용 가능</div>
+  </div>
+
+</div>
+
+<!-- 인재확보 그룹 -->
+<div class="ov-group-label">인재확보</div>
+<div class="overview-grid">
+
+  <div class="overview-card" onclick="go('best',null)" style="border-top-color:#f59e0b">
+    <div class="ov-icon">⭐</div>
+    <div class="ov-name">베스트 채용상품</div>
+    <div class="ov-sub">공고 리스트 상단 고정 노출<br>직무·지역 기반 추천 알고리즘</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:#f59e0b"></span>CPT · 리스트 상단 고정</div>
+  </div>
+
+  <div class="overview-card" onclick="go('spick',null)" style="border-top-color:var(--spick)">
+    <div class="ov-icon">🤖</div>
+    <div class="ov-name">스마트픽</div>
+    <div class="ov-sub">AI 매칭 기반 추천 영역 자동 노출<br>클릭 발생 시만 과금</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--spick)"></span>CPC · AI 매칭 · NEW</div>
+  </div>
+
+  <div class="overview-card" onclick="go('wpick',null)" style="border-top-color:var(--wpick)">
+    <div class="ov-icon">✨</div>
+    <div class="ov-name">원픽</div>
+    <div class="ov-sub">원픽 전용 공고 + AI 인재 추천<br>합격 시 수수료 · 퇴사 보장 80%</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--wpick)"></span>성과형 · Standard / Premium</div>
+  </div>
+
+  <div class="overview-card" onclick="go('pos',null)" style="border-top-color:var(--pos)">
+    <div class="ov-icon">🔍</div>
+    <div class="ov-name">포지션제안</div>
+    <div class="ov-sub">인재DB 검색 + 직접 제의<br>인재검색 화면 내 버튼 활성화</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--pos)"></span>기간제 이용권 · 5종</div>
+  </div>
+
+</div>
+
+<!-- 솔루션 그룹 -->
+<div class="ov-group-label">솔루션</div>
+<div class="overview-grid">
+
+  <div class="overview-card" onclick="go('pkg',null)" style="border-top-color:var(--pkg)">
+    <div class="ov-icon">📦</div>
+    <div class="ov-name">기업회원 패키지</div>
+    <div class="ov-sub">채용광고 대량 선구매<br>기간 내 공고별 분배 사용</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--pkg)"></span>상담 후 견적 · 수시채용 적합</div>
+  </div>
+
+  <div class="overview-card" onclick="go('ats',null)" style="border-top-color:var(--ats)">
+    <div class="ov-icon">🗂️</div>
+    <div class="ov-name">ATS · 나인하이어</div>
+    <div class="ov-sub">지원자 추적 시스템<br>무료 플랜 / 엔터프라이즈</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--ats)"></span>SaaS · ninehire.com</div>
+  </div>
+
+  <div class="overview-card" onclick="go('lrn',null)" style="border-top-color:var(--lrn)">
+    <div class="ov-icon">📚</div>
+    <div class="ov-name">기업러닝</div>
+    <div class="ov-sub">법정 의무교육 + 직무 학습<br>기업용 HRD 스마트러닝</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--lrn)"></span>계약 후 3일 내 오픈</div>
+  </div>
+
+  <div class="overview-card" onclick="go('ass',null)" style="border-top-color:var(--ass)">
+    <div class="ov-icon">🧠</div>
+    <div class="ov-name">인적성 검사</div>
+    <div class="ov-sub">스마트A 직종전문 · JAT 종합<br>채용 전형 보조 도구</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--ass)"></span>문의 후 견적 · 2종</div>
+  </div>
+
+  <div class="overview-card" onclick="go('ban',null)" style="border-top-color:var(--ban)">
+    <div class="ov-icon">🖼️</div>
+    <div class="ov-name">배너광고</div>
+    <div class="ov-sub">브랜딩 목적 디스플레이 광고<br>메인·서브 지면 노출</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--ban)"></span>CPT · 담당자 문의</div>
+  </div>
+
+  <div class="overview-card" onclick="go('ai',null)" style="border-top-color:var(--ai)">
+    <div class="ov-icon">🤖</div>
+    <div class="ov-name">자소서 AI 분석</div>
+    <div class="ov-sub">65억 건 DB 기반 표절률 검사<br>문항별 유사도 분석 리포트</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--ai)"></span>공고 단위 신청</div>
+  </div>
+
+</div>
+
+</div><!-- /ov -->
+
+
+<!-- ════════ 메인 노출 ════════ -->
+<div class="view" id="v-main">
+
+  <!-- 프리미어 -->
+  <div class="sh"><div class="sh-bar" style="background:var(--main)"></div><span class="sh-title">프리미어 채용관</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/option" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <!-- Mobile -->
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 메인</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+        <rect x="3" y="3" width="174" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="174" height="20" rx="8" fill="#e9ecf2"/>
+            <rect x="72.0" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="11.2" y="33.6" width="157.5" height="15.5" rx="3.2" fill="#d8dce6"/>
+            <rect x="11.2" y="53.9" width="157.5" height="60" rx="6.4" fill="rgba(220,38,38,.12)" stroke="#dc2626" stroke-width="1.6"/>
+            <text x="90" y="76.8" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#dc2626">프리미어 채용관</text>
+            <text x="90" y="91.2" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#dc2626" opacity=".7">M 메인 최상단 풀배너</text>
+            <text x="90" y="104.5" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#dc2626" opacity=".5">기업로고 + 공고 슬라이드</text>
+            <rect x="11.2" y="120" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="140.3" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="160.8" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="181.2" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="201.6" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="222" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="242.4" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="11.2" y="262.9" width="157.5" height="15.5" rx="3.2" fill="#e9ecf2"/>
+            <rect x="3.4" y="332.3" width="172.1" height="24" rx="19.1" fill="#e9ecf2"/>
+          </svg>
+        </div>
+        <!-- PC -->
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 메인</div>
+          <svg width="520" height="300" viewBox="0 0 520 300" style="overflow:hidden">
+            <rect x="3" y="3" width="514" height="294" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+            <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <rect x="8" y="27" width="504" height="90" rx="4" fill="#e9ecf2"/>
+            <text x="260" y="76" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c8cedc">메인 콘텐츠 영역</text>
+            <rect x="8" y="125" width="504" height="60" rx="5" fill="rgba(220,38,38,.14)" stroke="#dc2626" stroke-width="1.8"/>
+            <text x="260" y="150" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#dc2626">First VVIP 채용관</text>
+            <text x="260" y="168" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#dc2626" opacity=".7">프리미어 구매 시 PC 영역 자동 연동</text>
+            <rect x="8" y="193" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="213" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="233" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="253" width="504" height="10" rx="3" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">프리미어 채용관</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">M</td><td class="val">프리미어 채용관 모바일 영역 노출</td></tr>
+        <tr><td class="lbl">PC</td><td class="val">First VVIP 채용관 PC 고정 영역 노출</td></tr>
+        <tr><td class="lbl">노출 방식</td><td class="val">스크롤과 무관하게 최상단 고정</td></tr>
+        <tr><td class="lbl">구매 방식</td><td class="val">전담 컨설턴트 통해서만 구매 가능<br>(온라인 직접 구매 불가)</td></tr>
+        <tr><td class="lbl">부가 포함</td><td class="val">
+          <ul class="al">
+            <li>TOP 헤드라인 (M) 직무·지역</li>
+            <li>TOP 헤드라인 (PC) 직무·지역</li>
+            <li>점프업 8회(M) + 12회(PC)</li>
+          </ul>
+        </td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--main);border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.08)">M 메인 풀배너</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- First VVIP / VIP / Excellent -->
+  <div class="sh" style="margin-top:28px"><div class="sh-bar" style="background:var(--main)"></div><span class="sh-title">First VVIP · VIP · Excellent 채용관</span><span class="pb-badge all-b">PC + M</span></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 메인</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+            <rect x="3" y="3" width="174" height="354" rx="20" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+            <rect x="3" y="3" width="174" height="22" rx="20" fill="#e9ecf2"/>
+            <rect x="72" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="31" width="160" height="16" rx="4" fill="#d8dce6"/>
+            <!-- 프리미어 (상위 등급, 비활성) -->
+            <rect x="10" y="53" width="160" height="18" rx="4" fill="rgba(255,77,109,.07)" stroke="#ff4d6d" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <text x="90" y="66" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".4">프리미어 (상위 등급)</text>
+            <!-- First VVIP -->
+            <rect x="10" y="77" width="160" height="42" rx="5" fill="rgba(255,77,109,.22)" stroke="#ff4d6d" stroke-width="1.5"/>
+            <text x="90" y="94" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#ff4d6d">First VVIP</text>
+            <text x="90" y="110" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">배너+기업명+공고</text>
+            <!-- VIP -->
+            <rect x="10" y="125" width="160" height="34" rx="5" fill="rgba(255,77,109,.15)" stroke="#ff4d6d" stroke-width="1"/>
+            <text x="90" y="138" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="600" fill="#ff4d6d">VIP</text>
+            <text x="90" y="152" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">로고 + 공고 타이틀</text>
+            <!-- Excellent -->
+            <rect x="10" y="165" width="160" height="28" rx="5" fill="rgba(255,77,109,.09)" stroke="#ff4d6d" stroke-width="0.8"/>
+            <text x="90" y="178" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="600" fill="#ff4d6d">Excellent</text>
+            <text x="90" y="193" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">공고 타이틀</text>
+            <!-- 일반 리스트 -->
+            <rect x="10" y="200" width="160" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="10" y="220" width="160" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="10" y="240" width="160" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="10" y="260" width="160" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="10" y="280" width="160" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="3" y="335" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 메인</div>
+          <svg width="520" height="380" viewBox="0 0 520 380" style="overflow:hidden">
+            <!-- PC 외형 -->
+            <rect x="3" y="3" width="514" height="374" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+            <!-- GNB -->
+            <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <!-- 상단 메인 콘텐츠 영역 -->
+            <rect x="8" y="27" width="504" height="80" rx="4" fill="#e9ecf2"/>
+            <text x="260" y="71" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c8cedc">메인 콘텐츠 영역</text>
+            <!-- First VVIP 채용관 (PC+M 동시) -->
+            <rect x="8" y="113" width="504" height="56" rx="5" fill="rgba(255,77,109,.22)" stroke="#ff4d6d" stroke-width="1.8"/>
+            <text x="260" y="138" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#ff4d6d">First VVIP 채용관</text>
+            <text x="260" y="154" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">PC + M 동시 노출</text>
+            <!-- VIP 채용관 -->
+            <rect x="8" y="175" width="504" height="48" rx="5" fill="rgba(255,77,109,.14)" stroke="#ff4d6d" stroke-width="1.2"/>
+            <text x="260" y="196" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="600" fill="#ff4d6d">VIP 채용관</text>
+            <text x="260" y="212" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">PC + M 동시 노출</text>
+            <!-- Excellent 채용관 -->
+            <rect x="8" y="229" width="504" height="42" rx="5" fill="rgba(255,77,109,.08)" stroke="#ff4d6d" stroke-width="0.8"/>
+            <text x="260" y="248" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="600" fill="#ff4d6d">Excellent 채용관</text>
+            <text x="260" y="264" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff4d6d" opacity=".7">PC + M 동시 노출</text>
+            <!-- 공고 리스트 -->
+            <rect x="8" y="278" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="298" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="318" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="338" width="504" height="14" rx="3" fill="#e9ecf2"/>
+            <rect x="8" y="358" width="504" height="10" rx="3" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">First VVIP · VIP · Excellent</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">First VVIP</td><td class="val">First VVIP 채용관 PC/모바일 영역 동시 노출</td></tr>
+        <tr><td class="lbl">VIP</td><td class="val">VIP 채용관 PC/모바일 영역 동시 노출</td></tr>
+        <tr><td class="lbl">Excellent</td><td class="val">Excellent 채용관 PC/모바일 영역 동시 노출</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이용 절차 -->
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차 — 메인 노출 채용광고</div>
+    <div class="pf-steps">
+      <div class="pf-step">
+        <div class="pf-node" style="border-color:rgba(255,77,109,.4)">📋</div>
+        <div class="pf-step-title">공고 등록</div>
+        <div class="pf-step-sub">채용공고 먼저 등록<br>(무료)</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-node" style="border-color:rgba(255,77,109,.4)">🛒</div>
+        <div class="pf-step-title">상품 선택</div>
+        <div class="pf-step-sub">서비스 안내 페이지<br>등급 · 기간 선택</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-node" style="border-color:rgba(255,77,109,.4)">📄</div>
+        <div class="pf-step-title">견적 확인</div>
+        <div class="pf-step-sub">할인 내역 확인<br>7일+ 15% 즉시할인</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-node" style="border-color:rgba(255,77,109,.4)">💳</div>
+        <div class="pf-step-title">결제</div>
+        <div class="pf-step-sub">온라인 결제<br>(프리미어는 컨설턴트)</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-node" style="border-color:rgba(255,77,109,.4)">📡</div>
+        <div class="pf-step-title">노출 시작</div>
+        <div class="pf-step-sub">익일 시작 시<br>당일 하루 무료 제공</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /main -->
+
+
+<!-- ════════ MAX ════════ -->
+<div class="view" id="v-max">
+  <div class="sh"><div class="sh-bar" style="background:var(--max)"></div><span class="sh-title">[MAX] 직무 + 지역 동시 노출</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/option" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div style="margin-bottom:10px;font-size:11px;font-weight:700;color:var(--t4)">직무 리스트 (PC + M)</div>
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 직무 리스트</div>
+          <svg width="520" height="310" viewBox="0 0 520 310" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="304" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="14" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <rect x="3" y="20" width="80" height="287" fill="#f0f2f6" stroke="#e2e6ee" stroke-width="0.8"/>
+            <text x="43" y="38" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">카테고리</text>
+            <rect x="7" y="48" width="72" height="11" rx="3" fill="#dde1ea"/>
+            <rect x="7" y="66" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="84" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="102" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="120" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="138" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="156" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="174" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="192" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="210" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="88" y="24" width="426" height="26" rx="4" fill="#e9ecf2"/>
+            <text x="301" y="41" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">직무: IT·개발</text>
+            <rect x="88" y="54" width="426" height="42" rx="4" fill="rgba(37,99,235,0.22)" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="301" y="80" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb" opacity="0.9">TOP 헤드라인</text>
+            <rect x="88" y="99" width="426" height="30" rx="4" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="1.2"/>
+            <text x="301" y="119" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인+</text>
+            <rect x="88" y="132" width="426" height="26" rx="4" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="0.9"/>
+            <text x="301" y="150" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인</text>
+            <rect x="88" y="161" width="426" height="22" rx="4" fill="rgba(37,99,235,0.07)" stroke="#2563eb" stroke-width="0.8"/>
+            <text x="301" y="177" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천+</text>
+            <rect x="88" y="186" width="426" height="20" rx="4" fill="rgba(37,99,235,0.05)" stroke="#2563eb" stroke-width="0.8"/>
+            <text x="301" y="201" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천</text>
+            <rect x="88" y="209" width="426" height="18" rx="4" fill="rgba(37,99,235,0.03)" stroke="#2563eb" stroke-width="0.7"/>
+            <text x="301" y="223" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심+</text>
+            <rect x="88" y="230" width="426" height="16" rx="4" fill="rgba(37,99,235,0.02)" stroke="#2563eb" stroke-width="0.7"/>
+            <text x="301" y="243" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심</text>
+            <rect x="88" y="251" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            <rect x="88" y="267" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 직무 리스트</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+        <rect x="3" y="3" width="174" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="174" height="20" rx="8" fill="#e9ecf2"/>
+            <rect x="72.0" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="27" width="160" height="22" rx="4" fill="#e9ecf2"/>
+          <text x="90" y="40" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">직무: IT·개발</text>
+          <rect x="10" y="54" width="160" height="38" rx="4" fill="rgba(37,99,235,0.22)" stroke="#2563eb" stroke-width="1.8"/>
+          <text x="90" y="78" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb" opacity="0.9">TOP 헤드라인</text>
+          <rect x="10" y="95" width="160" height="28" rx="4" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="90" y="114" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인+</text>
+          <rect x="10" y="126" width="160" height="24" rx="4" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="0.9"/>
+          <text x="90" y="143" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인</text>
+          <rect x="10" y="153" width="160" height="20" rx="4" fill="rgba(37,99,235,0.07)" stroke="#2563eb" stroke-width="0.8"/>
+          <text x="90" y="168" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천+</text>
+          <rect x="10" y="176" width="160" height="18" rx="4" fill="rgba(37,99,235,0.05)" stroke="#2563eb" stroke-width="0.8"/>
+          <text x="90" y="190" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천</text>
+          <rect x="10" y="197" width="160" height="16" rx="4" fill="rgba(37,99,235,0.03)" stroke="#2563eb" stroke-width="0.7"/>
+          <text x="90" y="210" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심+</text>
+          <rect x="10" y="216" width="160" height="14" rx="4" fill="rgba(37,99,235,0.02)" stroke="#2563eb" stroke-width="0.7"/>
+          <text x="90" y="228" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심</text>
+          <rect x="10" y="235" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="10" y="250" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="3" y="341" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+      <div style="margin:16px 0 10px;font-size:11px;font-weight:700;color:var(--t4);border-top:1px solid var(--bd);padding-top:14px">지역 리스트 (PC + M)</div>
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 지역 리스트</div>
+          <svg width="520" height="310" viewBox="0 0 520 310" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="304" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="14" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <rect x="3" y="20" width="80" height="287" fill="#f0f2f6" stroke="#e2e6ee" stroke-width="0.8"/>
+            <text x="43" y="38" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">카테고리</text>
+            <rect x="7" y="48" width="72" height="11" rx="3" fill="#dde1ea"/>
+            <rect x="7" y="66" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="84" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="102" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="120" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="138" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="156" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="174" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="192" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="210" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="88" y="24" width="426" height="26" rx="4" fill="#e9ecf2"/>
+            <text x="301" y="41" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">지역: 강남구</text>
+            <rect x="88" y="54" width="426" height="42" rx="4" fill="rgba(5,150,105,0.22)" stroke="#059669" stroke-width="1.8"/>
+            <text x="301" y="80" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#059669" opacity="0.9">TOP 헤드라인</text>
+            <rect x="88" y="99" width="426" height="30" rx="4" fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="1.2"/>
+            <text x="301" y="119" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">헤드라인+</text>
+            <rect x="88" y="132" width="426" height="26" rx="4" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="0.9"/>
+            <text x="301" y="150" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">헤드라인</text>
+            <rect x="88" y="161" width="426" height="22" rx="4" fill="rgba(5,150,105,0.07)" stroke="#059669" stroke-width="0.8"/>
+            <text x="301" y="177" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">추천+</text>
+            <rect x="88" y="186" width="426" height="20" rx="4" fill="rgba(5,150,105,0.05)" stroke="#059669" stroke-width="0.8"/>
+            <text x="301" y="201" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">추천</text>
+            <rect x="88" y="209" width="426" height="18" rx="4" fill="rgba(5,150,105,0.03)" stroke="#059669" stroke-width="0.7"/>
+            <text x="301" y="223" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">핵심+</text>
+            <rect x="88" y="230" width="426" height="16" rx="4" fill="rgba(5,150,105,0.02)" stroke="#059669" stroke-width="0.7"/>
+            <text x="301" y="243" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">핵심</text>
+            <rect x="88" y="251" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            <rect x="88" y="267" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 지역 리스트</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+        <rect x="3" y="3" width="174" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="174" height="20" rx="8" fill="#e9ecf2"/>
+            <rect x="72.0" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="27" width="160" height="22" rx="4" fill="#e9ecf2"/>
+          <text x="90" y="40" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">지역: 강남구</text>
+          <rect x="10" y="54" width="160" height="38" rx="4" fill="rgba(5,150,105,0.22)" stroke="#059669" stroke-width="1.8"/>
+          <text x="90" y="78" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#059669" opacity="0.9">TOP 헤드라인</text>
+          <rect x="10" y="95" width="160" height="28" rx="4" fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="1.2"/>
+          <text x="90" y="114" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">헤드라인+</text>
+          <rect x="10" y="126" width="160" height="24" rx="4" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="0.9"/>
+          <text x="90" y="143" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">헤드라인</text>
+          <rect x="10" y="153" width="160" height="20" rx="4" fill="rgba(5,150,105,0.07)" stroke="#059669" stroke-width="0.8"/>
+          <text x="90" y="168" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">추천+</text>
+          <rect x="10" y="176" width="160" height="18" rx="4" fill="rgba(5,150,105,0.05)" stroke="#059669" stroke-width="0.8"/>
+          <text x="90" y="190" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">추천</text>
+          <rect x="10" y="197" width="160" height="16" rx="4" fill="rgba(5,150,105,0.03)" stroke="#059669" stroke-width="0.7"/>
+          <text x="90" y="210" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">핵심+</text>
+          <rect x="10" y="216" width="160" height="14" rx="4" fill="rgba(5,150,105,0.02)" stroke="#059669" stroke-width="0.7"/>
+          <text x="90" y="228" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#059669" opacity="0.75">핵심</text>
+          <rect x="10" y="235" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="10" y="250" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="3" y="341" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">[MAX] 7종</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th>종</th></tr>
+        
+        <tr><td class="val">헤드라인 플러스</td></tr>
+        <tr><td class="val">헤드라인</td></tr>
+        <tr><td class="val">추천 플러스</td></tr>
+        <tr><td class="val">추천</td></tr>
+        <tr><td class="val">핵심 플러스</td></tr>
+        <tr><td class="val">핵심</td></tr>
+      </table>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">노출 조건</td><td class="val"><b>직무 리스트 + 근무지 지역 리스트 동시</b></td></tr>
+        <tr><td class="lbl">플랫폼</td><td class="val">PC + 모바일 동시</td></tr>
+        <tr><td class="lbl">등급 차이</td><td class="val">등급이 높을수록 리스트 상단, 더 큰 노출 영역</td></tr>
+        <tr><td class="lbl">vs 단독</td><td class="val">직무 단독 대비 약 2배 도달 (지역까지 포함)</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--max);border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.08)">직무+지역 동시</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차 — MAX / 직무 / 지역 채용광고 공통</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(0,201,167,.4)">📋</div><div class="pf-step-title">공고 등록</div><div class="pf-step-sub">채용공고 먼저<br>등록 (무료)</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(0,201,167,.4)">🛒</div><div class="pf-step-title">상품 선택</div><div class="pf-step-sub">등급·기간 선택<br>서비스 안내 페이지</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(0,201,167,.4)">💳</div><div class="pf-step-title">온라인 결제</div><div class="pf-step-sub">7일+ 시 15%<br>즉시 할인 자동 적용</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(0,201,167,.4)">📡</div><div class="pf-step-title">즉시 노출</div><div class="pf-step-sub">결제 완료 후<br>해당 리스트 즉시 노출</div></div>
+    </div>
+  </div>
+</div><!-- /max -->
+
+
+<!-- ════════ 직무/지역 단독 — 구조 동일, 색만 다름 ════════ -->
+<div class="view" id="v-part">
+  <div class="sh"><div class="sh-bar" style="background:var(--part)"></div><span class="sh-title">직무·산업 단독 (PC+M)</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/option" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 직무 리스트</div>
+          <svg width="520" height="310" viewBox="0 0 520 310" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="304" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="14" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <rect x="3" y="20" width="80" height="287" fill="#f0f2f6" stroke="#e2e6ee" stroke-width="0.8"/>
+            <text x="43" y="38" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">카테고리</text>
+            <rect x="7" y="48" width="72" height="11" rx="3" fill="#dde1ea"/>
+            <rect x="7" y="66" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="84" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="102" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="120" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="138" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="156" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="174" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="192" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="210" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="88" y="24" width="426" height="26" rx="4" fill="#e9ecf2"/>
+            <text x="301" y="41" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">직무: IT·개발</text>
+            <rect x="88" y="54" width="426" height="42" rx="4" fill="rgba(37,99,235,0.22)" stroke="#2563eb" stroke-width="1.8"/>
+            <text x="301" y="80" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb" opacity="0.9">TOP 헤드라인</text>
+            <rect x="88" y="99" width="426" height="30" rx="4" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="1.2"/>
+            <text x="301" y="119" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인+</text>
+            <rect x="88" y="132" width="426" height="26" rx="4" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="0.9"/>
+            <text x="301" y="150" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인</text>
+            <rect x="88" y="161" width="426" height="22" rx="4" fill="rgba(37,99,235,0.07)" stroke="#2563eb" stroke-width="0.8"/>
+            <text x="301" y="177" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천+</text>
+            <rect x="88" y="186" width="426" height="20" rx="4" fill="rgba(37,99,235,0.05)" stroke="#2563eb" stroke-width="0.8"/>
+            <text x="301" y="201" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천</text>
+            <rect x="88" y="209" width="426" height="18" rx="4" fill="rgba(37,99,235,0.03)" stroke="#2563eb" stroke-width="0.7"/>
+            <text x="301" y="223" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심+</text>
+            <rect x="88" y="230" width="426" height="16" rx="4" fill="rgba(37,99,235,0.02)" stroke="#2563eb" stroke-width="0.7"/>
+            <text x="301" y="243" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심</text>
+            <rect x="88" y="251" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            <rect x="88" y="267" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 직무 리스트</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+        <rect x="3" y="3" width="174" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="174" height="20" rx="8" fill="#e9ecf2"/>
+            <rect x="72.0" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="27" width="160" height="22" rx="4" fill="#e9ecf2"/>
+          <text x="90" y="40" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">직무: IT·개발</text>
+          <rect x="10" y="54" width="160" height="38" rx="4" fill="rgba(37,99,235,0.22)" stroke="#2563eb" stroke-width="1.8"/>
+          <text x="90" y="78" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb" opacity="0.9">TOP 헤드라인</text>
+          <rect x="10" y="95" width="160" height="28" rx="4" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="90" y="114" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인+</text>
+          <rect x="10" y="126" width="160" height="24" rx="4" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="0.9"/>
+          <text x="90" y="143" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">헤드라인</text>
+          <rect x="10" y="153" width="160" height="20" rx="4" fill="rgba(37,99,235,0.07)" stroke="#2563eb" stroke-width="0.8"/>
+          <text x="90" y="168" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천+</text>
+          <rect x="10" y="176" width="160" height="18" rx="4" fill="rgba(37,99,235,0.05)" stroke="#2563eb" stroke-width="0.8"/>
+          <text x="90" y="190" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">추천</text>
+          <rect x="10" y="197" width="160" height="16" rx="4" fill="rgba(37,99,235,0.03)" stroke="#2563eb" stroke-width="0.7"/>
+          <text x="90" y="210" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심+</text>
+          <rect x="10" y="216" width="160" height="14" rx="4" fill="rgba(37,99,235,0.02)" stroke="#2563eb" stroke-width="0.7"/>
+          <text x="90" y="228" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#2563eb" opacity="0.75">핵심</text>
+          <rect x="10" y="235" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="10" y="250" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="3" y="341" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">직무 단독 (7종)</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th>종</th><th>점프업(PC)</th></tr>
+        
+        <tr><td class="val">헤드라인 플러스</td><td class="val">12회</td></tr>
+        <tr><td class="val">헤드라인</td><td class="val">12회</td></tr>
+        <tr><td class="val">추천 플러스</td><td class="val">8회</td></tr>
+        <tr><td class="val">추천</td><td class="val">8회</td></tr>
+        <tr><td class="val">핵심 플러스</td><td class="val">6회</td></tr>
+        <tr><td class="val">핵심</td><td class="val">6회</td></tr>
+      </table>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">노출 조건</td><td class="val">공고에 설정된 업·직종 필터 기준으로 해당 직무 리스트에만 노출</td></tr>
+        <tr><td class="lbl">콘텐츠</td><td class="val">TOP 헤드라인은 배너 이미지 포함, 하위 등급은 텍스트 위주</td></tr>
+        <tr><td class="lbl">vs MAX</td><td class="val">지역 리스트에는 미노출. 단일 직종 채용 시 활용</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--part);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">직무 리스트</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">📋</div><div class="pf-step-title">공고 등록</div><div class="pf-step-sub">업·직종 정확히<br>설정 필수</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">🛒</div><div class="pf-step-title">상품·기간 선택</div><div class="pf-step-sub">등급 선택<br>최소 2일</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">💳</div><div class="pf-step-title">온라인 결제</div><div class="pf-step-sub">7일+ 15% 할인</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">📡</div><div class="pf-step-title">즉시 노출</div><div class="pf-step-sub">해당 직무<br>리스트 상단</div></div>
+    </div>
+  </div>
+</div><!-- /part -->
+
+
+<!-- ════════ 지역 단독 ════════ -->
+<div class="view" id="v-area">
+  <div class="sh"><div class="sh-bar" style="background:var(--area)"></div><span class="sh-title">지역 단독 (PC+M)</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/option" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="note">직무 단독과 노출 구조·가격이 동일하며, <strong>노출 조건만 다릅니다</strong> — 직무 필터 대신 근무지 주소(지역) 필터에 노출됩니다. 같은 등급이라도 지역 집중 채용이라면 지역 단독을, 직무 집중이라면 직무 단독을, 둘 다 원한다면 [MAX]를 선택하세요.</div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">PC 지역 리스트</div>
+          <svg width="520" height="310" viewBox="0 0 520 310" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="304" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+            <text x="260" y="14" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">JOBKOREA</text>
+            <rect x="3" y="20" width="80" height="287" fill="#f0f2f6" stroke="#e2e6ee" stroke-width="0.8"/>
+            <text x="43" y="38" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">카테고리</text>
+            <rect x="7" y="48" width="72" height="11" rx="3" fill="#dde1ea"/>
+            <rect x="7" y="66" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="84" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="102" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="120" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="138" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="156" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="174" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="192" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="7" y="210" width="72" height="11" rx="3" fill="#eaecf0"/>
+            <rect x="88" y="24" width="426" height="26" rx="4" fill="#e9ecf2"/>
+            <text x="301" y="41" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">지역: 강남구</text>
+            <rect x="88" y="54" width="426" height="42" rx="4" fill="rgba(217,119,6,0.22)" stroke="#d97706" stroke-width="1.8"/>
+            <text x="301" y="80" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#d97706" opacity="0.9">TOP 헤드라인</text>
+            <rect x="88" y="99" width="426" height="30" rx="4" fill="rgba(217,119,6,0.15)" stroke="#d97706" stroke-width="1.2"/>
+            <text x="301" y="119" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">헤드라인+</text>
+            <rect x="88" y="132" width="426" height="26" rx="4" fill="rgba(217,119,6,0.1)" stroke="#d97706" stroke-width="0.9"/>
+            <text x="301" y="150" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">헤드라인</text>
+            <rect x="88" y="161" width="426" height="22" rx="4" fill="rgba(217,119,6,0.07)" stroke="#d97706" stroke-width="0.8"/>
+            <text x="301" y="177" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">추천+</text>
+            <rect x="88" y="186" width="426" height="20" rx="4" fill="rgba(217,119,6,0.05)" stroke="#d97706" stroke-width="0.8"/>
+            <text x="301" y="201" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">추천</text>
+            <rect x="88" y="209" width="426" height="18" rx="4" fill="rgba(217,119,6,0.03)" stroke="#d97706" stroke-width="0.7"/>
+            <text x="301" y="223" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">핵심+</text>
+            <rect x="88" y="230" width="426" height="16" rx="4" fill="rgba(217,119,6,0.02)" stroke="#d97706" stroke-width="0.7"/>
+            <text x="301" y="243" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">핵심</text>
+            <rect x="88" y="251" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            <rect x="88" y="267" width="426" height="11" rx="3" fill="#e9ecf2"/>
+            </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile 지역 리스트</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+        <rect x="3" y="3" width="174" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="174" height="20" rx="8" fill="#e9ecf2"/>
+            <rect x="72.0" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="27" width="160" height="22" rx="4" fill="#e9ecf2"/>
+          <text x="90" y="40" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">지역: 강남구</text>
+          <rect x="10" y="54" width="160" height="38" rx="4" fill="rgba(217,119,6,0.22)" stroke="#d97706" stroke-width="1.8"/>
+          <text x="90" y="78" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#d97706" opacity="0.9">TOP 헤드라인</text>
+          <rect x="10" y="95" width="160" height="28" rx="4" fill="rgba(217,119,6,0.15)" stroke="#d97706" stroke-width="1.2"/>
+          <text x="90" y="114" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">헤드라인+</text>
+          <rect x="10" y="126" width="160" height="24" rx="4" fill="rgba(217,119,6,0.1)" stroke="#d97706" stroke-width="0.9"/>
+          <text x="90" y="143" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">헤드라인</text>
+          <rect x="10" y="153" width="160" height="20" rx="4" fill="rgba(217,119,6,0.07)" stroke="#d97706" stroke-width="0.8"/>
+          <text x="90" y="168" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">추천+</text>
+          <rect x="10" y="176" width="160" height="18" rx="4" fill="rgba(217,119,6,0.05)" stroke="#d97706" stroke-width="0.8"/>
+          <text x="90" y="190" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">추천</text>
+          <rect x="10" y="197" width="160" height="16" rx="4" fill="rgba(217,119,6,0.03)" stroke="#d97706" stroke-width="0.7"/>
+          <text x="90" y="210" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">핵심+</text>
+          <rect x="10" y="216" width="160" height="14" rx="4" fill="rgba(217,119,6,0.02)" stroke="#d97706" stroke-width="0.7"/>
+          <text x="90" y="228" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="400" fill="#d97706" opacity="0.75">핵심</text>
+          <rect x="10" y="235" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="10" y="250" width="160" height="10" rx="3" fill="#e9ecf2"/>
+          <rect x="3" y="341" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">지역 단독 (7종)</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">직무 단독과의 차이점</th></tr>
+        <tr><td class="lbl">노출 조건</td><td class="val"><b>근무지 주소(지역) 필터</b> 기준 노출<br>직무 단독은 업·직종 필터 기준</td></tr>
+        <tr><td class="lbl">추천 상황</td><td class="val">지역 거점 채용, 특정 지역 인재 필요 시</td></tr>
+        <tr><td class="lbl">가격·부가</td><td class="val">직무 단독과 완전 동일 (등급별 점프업 포함)</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">지역 리스트</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">📋</div><div class="pf-step-title">공고 등록</div><div class="pf-step-sub">근무지 주소<br>정확히 입력 필수</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">🛒</div><div class="pf-step-title">상품·기간 선택</div><div class="pf-step-sub">등급 선택<br>최소 2일</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">💳</div><div class="pf-step-title">온라인 결제</div><div class="pf-step-sub">7일+ 15% 할인</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">📡</div><div class="pf-step-title">즉시 노출</div><div class="pf-step-sub">해당 지역<br>리스트 상단</div></div>
+    </div>
+  </div>
+</div><!-- /area -->
+
+
+<!-- ════════ 점프업 ════════ -->
+<div class="view" id="v-jump">
+  <div class="sh"><div class="sh-bar" style="background:var(--jump)"></div><span class="sh-title">점프업 (PC+M)</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/option" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">공고 리스트 (시간 흐름)</div>
+          <svg width="520" height="300" viewBox="0 0 520 300" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="294" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">공고 리스트 내 점프업 동작</text>
+        <text x="135" y="49" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">점프업 전</text>
+        <rect x="21" y="57" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="85" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="113" width="229" height="22" rx="4" fill="rgba(124,58,237,.15)" stroke="#7c3aed" stroke-width="1"/>
+        <text x="135" y="128" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#7c3aed">내 공고</text>
+        <rect x="21" y="141" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="169" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <text x="260" y="125" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="16" fill="#7c3aed" font-weight="700">→</text>
+        <text x="384" y="49" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#7c3aed" font-weight="700">점프업 후</text>
+        <rect x="270" y="57" width="229" height="30" rx="4" fill="rgba(124,58,237,.22)" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="384" y="76" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#7c3aed">내 공고 ↑ 최상단</text>
+        <rect x="270" y="93" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="270" y="121" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="270" y="149" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="270" y="177" width="229" height="22" rx="3" fill="#e9ecf2"/>
+        <line x1="21" y1="217" x2="499" y2="217" stroke="#e2e6ee" stroke-width="1"/>
+        <text x="21" y="237" text-anchor="start" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">3/6/12회 하루 분산 재배치 · PC + M 동시 · 무료 공고에 적용</text>
+      </svg>
+        </div></div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">점프업 3 / 6 / 12회</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        
+        
+        <tr><td class="val">6회</td></tr>
+        <tr><td class="val">12회</td></tr>
+      </table>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">위치</td><td class="val">직무·지역 공고 <b>리스트 최상단</b></td></tr>
+        <tr><td class="lbl">방식</td><td class="val">설정 횟수만큼 하루 중 분산 재노출<br>(신규 공고처럼 상단으로 재배치)</td></tr>
+        <tr><td class="lbl">부가</td><td class="val">채용속보 랜덤 노출 자동 포함</td></tr>
+        <tr><td class="lbl">적용</td><td class="val">무료 공고에 적용 / 유료 상품의 부가로도 제공</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--jump);border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.08)">리스트 재배치</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">무료공고 부가</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(156,124,255,.4)">📋</div><div class="pf-step-title">공고 확인</div><div class="pf-step-sub">등록된 무료<br>공고 선택</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(156,124,255,.4)">🔢</div><div class="pf-step-title">횟수·기간 선택</div><div class="pf-step-sub">3 / 6 / 12회<br>최소 2일</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(156,124,255,.4)">💳</div><div class="pf-step-title">온라인 결제</div><div class="pf-step-sub"></div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(156,124,255,.4)">↑</div><div class="pf-step-title">자동 점프</div><div class="pf-step-sub">하루 중 N회<br>자동 상단 노출</div></div>
+    </div>
+  </div>
+</div><!-- /jump -->
+
+
+
+<!-- ════════ 베스트 채용상품 ════════ -->
+<div class="view" id="v-best">
+
+  <div class="sh"><div class="sh-bar" style="background:#f59e0b"></div><span class="sh-title">베스트 채용상품</span><span class="pb-badge all-b" style="background:rgba(245,158,11,.15);color:#f59e0b;border-color:rgba(245,158,11,.4)">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/product" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>상품 안내</a></div>
+
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">공고 리스트</div>
+          <svg width="520" height="280" viewBox="0 0 520 280" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="274" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">공고 리스트 내 베스트 채용상품 노출 위치</text>
+        <!-- 베스트 영역 -->
+        <rect x="21" y="35" width="478" height="52" rx="5" fill="rgba(245,158,11,.18)" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="33" y="55" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#f59e0b">⭐ 베스트 채용상품 — 리스트 상단 고정</text>
+        <text x="33" y="75" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f59e0b" opacity=".8">직무·지역 기반 추천 · 구직자 관심 공고 우선 노출</text>
+        <!-- 일반 공고 리스트 -->
+        <rect x="21" y="97" width="478" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="125" width="478" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="153" width="478" height="22" rx="3" fill="#e9ecf2"/>
+        <rect x="21" y="181" width="478" height="22" rx="3" fill="#e9ecf2"/>
+        <line x1="21" y1="219" x2="499" y2="219" stroke="#e2e6ee" stroke-width="1"/>
+        <text x="21" y="239" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">공고 리스트 상단 고정 · CPT 과금 · 직무·지역 페이지 동시 노출</text>
+      </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">베스트 채용상품</div>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">노출 위치</td><td class="val">직무·지역 공고 리스트 상단 고정</td></tr>
+        <tr><td class="lbl">노출 방식</td><td class="val">구직자 관심 직무·지역 기반 추천 알고리즘</td></tr>
+        <tr><td class="lbl">과금 방식</td><td class="val">CPT (기간 과금)</td></tr>
+        <tr><td class="lbl">구매 방식</td><td class="val">온라인 직접 구매 가능</td></tr>
+      </table>
+      <div class="tags">
+        <span class="tag" style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">리스트 상단</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">PC + M</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /best -->
+
+<!-- ════════ 스마트픽 ════════ -->
+<div class="view" id="v-spick">
+  <div class="sh"><div class="sh-bar" style="background:var(--spick)"></div><span class="sh-title">스마트픽 — AI 매칭 CPC</span><span class="pb-badge all-b">PC + M</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/cpc" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <div class="wf-row">
+        <div class="dev-wrap">
+          <div class="dev-lbl">Mobile — AI 추천 피드</div>
+          <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
+            <rect x="3" y="3" width="174" height="354" rx="20" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+            <rect x="3" y="3" width="174" height="22" rx="20" fill="#e9ecf2"/>
+            <rect x="72" y="9" width="36" height="6" rx="3" fill="#c8cedc"/>
+            <rect x="10" y="30" width="160" height="20" rx="4" fill="#e9ecf2"/>
+            <text x="90" y="40" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">AI 추천 피드</text>
+            <rect x="10" y="56" width="160" height="44" rx="4" fill="rgba(37,99,235,.14)" stroke="#2563eb" stroke-width="1"/>
+            <text x="18" y="72" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#2563eb">스마트픽 공고</text>
+            <text x="18" y="90" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#2563eb" opacity=".7">클릭 시 과금</text>
+            <rect x="10" y="108" width="160" height="34" rx="4" fill="#e9ecf2"/>
+            <rect x="10" y="148" width="160" height="34" rx="4" fill="#e9ecf2"/>
+            <rect x="10" y="188" width="160" height="34" rx="4" fill="#e9ecf2"/>
+            <rect x="10" y="228" width="160" height="34" rx="4" fill="#e9ecf2"/>
+            <rect x="10" y="268" width="160" height="34" rx="4" fill="#e9ecf2"/>
+            <rect x="3" y="341" width="174" height="16" rx="20" fill="#e9ecf2"/>
+          </svg>
+        </div>
+        <div class="dev-wrap">
+          <div class="dev-lbl">과금 구조</div>
+          <svg width="520" height="240" viewBox="0 0 520 240" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="234" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">CPC 과금 흐름</text>
+        <rect x="21" y="35" width="478" height="38" rx="6" fill="rgba(37,99,235,.1)" stroke="#2563eb" stroke-width="1.2"/>
+        <text x="260" y="59" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb">AI → 적합 구직자 자동 노출</text>
+        <text x="260" y="89" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">↓</text>
+        <rect x="21" y="97" width="478" height="38" rx="6" fill="rgba(37,99,235,.1)" stroke="#2563eb" stroke-width="1.2"/>
+        <text x="260" y="121" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb">클릭 → 비용 차감</text>
+        <text x="260" y="151" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">↓</text>
+        <rect x="21" y="159" width="478" height="38" rx="6" fill="#e9ecf2"/>
+        <text x="260" y="183" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#6b7280">일 예산 소진 시 중단</text>
+        <text x="21" y="213" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">클릭 없으면 비용 없음</text>
+      </svg>
+        </div>
+      </div>
+    </div>
+    <div class="mp">
+      <div class="mp-name">스마트픽</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">노출 위치</td><td class="val"><b>AI 추천 영역</b> — 메인·직무·지역 등 전 지면의 AI 피드</td></tr>
+        <tr><td class="lbl">노출 방식</td><td class="val">AI가 공고↔구직자 매칭 후 자동 노출<br>구직자 관심사·경력 기반 타겟</td></tr>
+        <tr><td class="lbl">과금 방식</td><td class="val">노출은 무료 · <b>클릭 시만 비용</b> 차감 (CPC)</td></tr>
+        <tr><td class="lbl">예산 통제</td><td class="val">일 예산 설정 → 초과 시 자동 노출 중단</td></tr>
+        <tr><td class="lbl">vs CPT</td><td class="val">기간 과금 아님 · 성과(클릭) 기반이라 낭비 없음</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">AI 매칭</span>
+        <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">CPC</span>
+        <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">클릭시 과금</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">NEW</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">📋</div><div class="pf-step-title">공고 등록</div><div class="pf-step-sub">일반 채용공고<br>등록</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">💰</div><div class="pf-step-title">예산 설정</div><div class="pf-step-sub">일 예산 · 광고<br>종료일 입력</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">🤖</div><div class="pf-step-title">AI 자동 노출</div><div class="pf-step-sub">적합 구직자<br>자동 타겟 노출</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">👆</div><div class="pf-step-title">클릭 시 과금</div><div class="pf-step-sub">클릭만큼만<br>비용 차감</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(77,126,255,.4)">📊</div><div class="pf-step-title">성과 확인</div><div class="pf-step-sub">클릭·지원<br>현황 리포트</div></div>
+    </div>
+  </div>
+</div><!-- /spick -->
+
+
+<!-- ════════ 원픽 ════════ -->
+<div class="view" id="v-wpick">
+  <div class="sh"><div class="sh-bar" style="background:var(--wpick)"></div><span class="sh-title">원픽 — AI 인재 추천 솔루션</span><a class="sh-link" href="https://www.jobkorea.co.kr/onepick/intro" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Standard</a><a class="sh-link" style="margin-left:6px" href="https://www.jobkorea.co.kr/OnePick/PremiumIntro" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Premium</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="360" viewBox="0 0 520 360" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="354" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">원픽 공고 관리 화면</text>
+        <!-- 좌측: 원픽 공고 -->
+        <rect x="21" y="35" width="235" height="170" rx="6" fill="rgba(124,58,237,.08)" stroke="#7c3aed" stroke-width="1"/>
+        <text x="138" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#7c3aed">원픽 공고</text>
+        <rect x="29" y="63" width="219" height="10" rx="3" fill="#9ca3af"/>
+        <rect x="29" y="79" width="175" height="9" rx="3" fill="#d8dce6"/>
+        <rect x="29" y="94" width="205" height="9" rx="3" fill="#d8dce6"/>
+        <rect x="29" y="111" width="165" height="22" rx="4" fill="rgba(124,58,237,.18)" stroke="#7c3aed" stroke-width="1"/>
+        <text x="118" y="126" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#7c3aed">합격 축하금 표시됨</text>
+        <rect x="29" y="141" width="219" height="9" rx="3" fill="#d8dce6"/>
+        <!-- 우측: AI 추천 인재 리스트 -->
+        <rect x="264" y="35" width="235" height="170" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="381" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#7c3aed">AI 추천 인재 리스트</text>
+        <rect x="272" y="63" width="219" height="28" rx="4" fill="rgba(124,58,237,.2)" stroke="#7c3aed" stroke-width="1"/>
+        <text x="381" y="81" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#7c3aed">인재 A · 적합도 94% · [지원 제안 발송]</text>
+        <rect x="272" y="97" width="219" height="22" rx="4" fill="#d8dce6"/>
+        <text x="381" y="112" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">인재 B · 적합도 81%</text>
+        <rect x="272" y="125" width="219" height="22" rx="4" fill="#d8dce6"/>
+        <text x="381" y="140" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">인재 C · 적합도 74%</text>
+        <!-- 하단 좌: 채용 완료 → 수수료 정산 -->
+        <rect x="21" y="215" width="235" height="52" rx="5" fill="#180d28" stroke="#4a2a7a" stroke-width="1.2"/>
+        <text x="138" y="235" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c090ff">채용 완료 → 수수료 정산</text>
+        <text x="138" y="251" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c090ff" opacity=".8">성공 시에만 비용 발생</text>
+        <!-- 하단 우: 3개월 내 퇴사 보장 -->
+        <rect x="264" y="215" width="235" height="52" rx="5" fill="#180d28" stroke="#4a2a7a" stroke-width="1.2"/>
+        <text x="381" y="235" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c090ff">3개월 내 퇴사 → 수수료 80% 환급</text>
+        <text x="381" y="251" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c090ff" opacity=".8">보장 정책</text>
+        <!-- 최하단: Premium 풀너비 -->
+        <rect x="21" y="275" width="478" height="36" rx="5" fill="#180d28" stroke="#4a2a7a" stroke-width="1.2"/>
+        <text x="260" y="297" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c090ff">원픽 Premium: 전담 코디네이터 직접 발굴 · 코딩테스트 등 사전 검증 대행</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">원픽 Standard / Premium</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">공고 위치</td><td class="val"><b>원픽 전용 공고 영역</b>에 별도 노출<br>(일반 공고 리스트와 구분)</td></tr>
+        <tr><td class="lbl">인재 연결</td><td class="val">AI가 공고 적합 인재 추천 → 기업이 직접 제안 발송</td></tr>
+        <tr><td class="lbl">구직자 혜택</td><td class="val">합격 축하금 제공 → 일반 공고 대비 지원율 높음</td></tr>
+        <tr><td class="lbl">보장</td><td class="val">입사 3개월 내 퇴사 시 수수료 80% 환급</td></tr>
+      </table>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th></th><th><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Standard</th><th><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Premium</th></tr>
+        <tr><td class="lbl">추천 방식</td><td class="val">AI 자동</td><td class="val">코디네이터 수동</td></tr>
+        <tr><td class="lbl">부가 기능</td><td class="val">-</td><td class="val">코딩테스트 대행</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--wpick);border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.08)">원픽 전용 공고</span>
+        <span class="tag" style="color:var(--wpick);border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.08)">AI 인재 추천</span>
+        <span class="tag" style="color:var(--wpick);border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.08)">성공 수수료</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">퇴사보장 80%</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(176,125,255,.4)">✅</div><div class="pf-step-title">약관 동의</div><div class="pf-step-sub">원픽 서비스<br>약관 동의</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(176,125,255,.4)">📋</div><div class="pf-step-title">원픽 공고 등록</div><div class="pf-step-sub">원픽 메뉴에서<br>공고 작성 (무료)</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(176,125,255,.4)">👥</div><div class="pf-step-title">AI 인재 추천</div><div class="pf-step-sub">적합도 기반<br>인재 리스트 제공</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(176,125,255,.4)">📨</div><div class="pf-step-title">지원 제안</div><div class="pf-step-sub">마음에 드는<br>인재에게 제안</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(176,125,255,.4)">🎉</div><div class="pf-step-title">채용 완료</div><div class="pf-step-sub">합격 확정 후<br>수수료 정산</div></div>
+    </div>
+  </div>
+</div><!-- /wpick -->
+
+
+<!-- ════════ 포지션제안 ════════ -->
+<div class="view" id="v-pos">
+  <div class="sh"><div class="sh-bar" style="background:var(--pos)"></div><span class="sh-title">포지션제안 서비스</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/searching" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="300" viewBox="0 0 520 300" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="294" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">인재검색 (/corp/person/find) — 이용권 활성 시</text>
+        <!-- 검색 필터 -->
+        <rect x="21" y="35" width="478" height="26" rx="4" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="1"/>
+        <text x="260" y="52" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#d97706" font-weight="600">검색 필터: 직종 / 경력 / 지역 / 학력 / 보유기술</text>
+        <!-- 카드 1 (활성) - 텍스트 좌측 수직 중앙 -->
+        <rect x="21" y="71" width="478" height="58" rx="5" fill="rgba(217,119,6,.1)" stroke="#d97706" stroke-width="1.2"/>
+        <text x="33" y="91" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#111827">홍길동 · 경력 7년 · 서울 강남 · Java / Spring</text>
+        <text x="33" y="109" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">前 스타트업 CTO · 백엔드 팀장</text>
+        <rect x="391" y="81" width="100" height="30" rx="5" fill="#d97706"/>
+        <text x="441" y="96" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#fff">[포지션 제안] →</text>
+        <!-- 카드 2 -->
+        <rect x="21" y="139" width="478" height="40" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="33" y="159" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#374151">김영수 · 경력 3년 · 경기 성남</text>
+        <rect x="391" y="147" width="100" height="26" rx="4" fill="#f3f4f6" stroke="#d8dce6" stroke-width="1"/>
+        <text x="441" y="160" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">[포지션 제안]</text>
+        <!-- 카드 3 -->
+        <rect x="21" y="189" width="478" height="40" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="33" y="209" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#374151">이지은 · 경력 5년 · 서울 마포</text>
+        <rect x="391" y="197" width="100" height="26" rx="4" fill="#f3f4f6" stroke="#d8dce6" stroke-width="1"/>
+        <text x="441" y="210" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">[포지션 제안]</text>
+        <!-- 하단 -->
+        <line x1="21" y1="243" x2="499" y2="243" stroke="#e2e6ee" stroke-width="1"/>
+        <text x="21" y="263" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">클릭 → 구직자에게 이메일 자동 발송 · 수락 시 연락처 공개</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">포지션제안 이용권</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th>기간</th></tr>
+        
+        <tr><td class="val">2개월</td></tr>
+        <tr><td class="val">3개월</td></tr>
+        <tr><td class="val">6개월</td></tr>
+        <tr><td class="val">12개월</td></tr>
+      </table>
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">작동 위치</td><td class="val">인재검색 화면 내 각 이력서 카드에<br><b>[포지션 제안] 버튼</b> 활성화</td></tr>
+        <tr><td class="lbl">열람 방식</td><td class="val">이력서 열람 후 제안 버튼 클릭 → 구직자에게 이메일</td></tr>
+        <tr><td class="lbl">제한</td><td class="val">정규·계약·인턴만 / 아르바이트 불가</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--pos);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">인재DB 검색</span>
+        <span class="tag" style="color:var(--pos);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">직접 제의</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">기간 이용권</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">5종</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">💳</div><div class="pf-step-title">이용권 결제</div><div class="pf-step-sub">기간 선택<br>본인인증 필요</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">✅</div><div class="pf-step-title">기업 확인</div><div class="pf-step-sub">익일 평일<br>09:30 완료</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">🔍</div><div class="pf-step-title">인재 검색</div><div class="pf-step-sub">직종·경력·<br>지역 필터</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">👁️</div><div class="pf-step-title">이력서 열람</div><div class="pf-step-sub">스크랩 가능<br>연락처 비공개</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(255,181,71,.4)">📩</div><div class="pf-step-title">포지션 제안</div><div class="pf-step-sub">구직자에게<br>이메일 자동 발송</div></div>
+    </div>
+  </div>
+</div><!-- /pos -->
+
+
+<!-- ════════ 솔루션 탭 공통 구조 (패키지/ATS/러닝/검사/배너/AI) ════════ -->
+
+<!-- 패키지 -->
+<div class="view" id="v-pkg">
+  <div class="sh"><div class="sh-bar" style="background:var(--pkg)"></div><span class="sh-title">기업회원 패키지</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/package" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="note">패키지는 <b>채용광고 상품을 대량으로 선구매</b>하는 방식입니다. 직무·지역 광고나 점프업을 수시로 여러 공고에 적용하는 기업에게 유리합니다. 담당자 상담 후 신청합니다.</div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="210" viewBox="0 0 520 210" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="204" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">패키지 적용 방식</text>
+        <rect x="21" y="35" width="140" height="72" rx="6" fill="rgba(8,145,178,.15)" stroke="#0891b2" stroke-width="1.3"/>
+        <text x="33" y="57" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#0891b2">직무·지역 패키지</text>
+        <text x="33" y="75" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#0891b2" opacity=".8">헤드라인~핵심</text>
+        <text x="33" y="93" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#0891b2" opacity=".8">대량 선구매</text>
+        <rect x="169" y="35" width="140" height="72" rx="6" fill="rgba(8,145,178,.15)" stroke="#0891b2" stroke-width="1.3"/>
+        <text x="181" y="57" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#0891b2">점프업 패키지</text>
+        <text x="181" y="77" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#0891b2" opacity=".8">예) 핵심 1,200건</text>
+        <text x="319" y="71" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="16" fill="#9ca3af">→</text>
+        <rect x="337" y="35" width="162" height="72" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="349" y="61" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">공고별</text>
+        <text x="349" y="83" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">자유 적용</text>
+        <line x1="21" y1="123" x2="499" y2="123" stroke="#e2e6ee" stroke-width="1"/>
+        <text x="21" y="143" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">기간 내 소진 방식 · 여러 공고에 자유롭게 분배 사용 가능</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">기업회원 패키지</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">상품 종류</th></tr>
+        <tr><td class="lbl">직무·지역</td><td class="val">헤드라인~핵심 등급 광고 대량 선구매<br>기간 내 원하는 공고에 자유 적용</td></tr>
+        <tr><td class="lbl">점프업</td><td class="val">예) 핵심 점프업 1,200건 → <br>여러 공고에 나눠서 소진</td></tr>
+        <tr><td class="lbl">추천 상황</td><td class="val">수시채용·다수 포지션 동시 운영 기업</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--pkg);border-color:rgba(8,145,178,.3);background:rgba(8,145,178,.08)">대량 선구매</span>
+        <span class="tag" style="color:var(--pkg);border-color:rgba(8,145,178,.3);background:rgba(8,145,178,.08)">기간 내 분배</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">단가 절감</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">상담 후 견적</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(56,189,248,.4)">📞</div><div class="pf-step-title">패키지 신청</div><div class="pf-step-sub">서비스 안내<br>페이지에서 신청</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(56,189,248,.4)">🤝</div><div class="pf-step-title">담당자 상담</div><div class="pf-step-sub">구성·규모<br>견적 협의</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(56,189,248,.4)">💰</div><div class="pf-step-title">입금 확인</div><div class="pf-step-sub">세금계산서<br>발행</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(56,189,248,.4)">⚡</div><div class="pf-step-title">즉시 사용 가능</div><div class="pf-step-sub">공고 관리 화면<br>에서 적용</div></div>
+    </div>
+  </div>
+</div><!-- /pkg -->
+
+<!-- ATS -->
+<div class="view" id="v-ats">
+  <div class="sh"><div class="sh-bar" style="background:var(--ats)"></div><span class="sh-title">채용 관리 솔루션 — 나인하이어 (ATS)</span><a class="sh-link" href="https://www.ninehire.com" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="240" viewBox="0 0 520 240" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="234" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">nainhire.com — 채용 관리 대시보드</text>
+        <rect x="21" y="35" width="108" height="82" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="75" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c2410c">공고 관리</text>
+        <rect x="29" y="61" width="92" height="8" rx="2" fill="#9ca3af"/>
+        <rect x="29" y="75" width="76" height="8" rx="2" fill="#d8dce6"/>
+        <rect x="137" y="35" width="108" height="82" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="191" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c2410c">지원자 트래킹</text>
+        <rect x="145" y="61" width="92" height="18" rx="3" fill="rgba(194,65,12,.15)" stroke="#c2410c" stroke-width="0.8"/>
+        <text x="191" y="74" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c2410c">서류 → 면접 → 최종</text>
+        <rect x="145" y="85" width="92" height="8" rx="2" fill="#d8dce6"/>
+        <rect x="253" y="35" width="108" height="82" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="307" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c2410c">면접 일정 조율</text>
+        <rect x="261" y="61" width="92" height="8" rx="2" fill="#9ca3af"/>
+        <rect x="261" y="75" width="76" height="8" rx="2" fill="#d8dce6"/>
+        <rect x="369" y="35" width="130" height="82" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="434" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c2410c">채용 데이터 분석</text>
+        <rect x="379" y="63" width="110" height="28" rx="3" fill="rgba(194,65,12,.1)" stroke="#c2410c" stroke-width="0.8"/>
+        <text x="434" y="81" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c2410c">29가지+ 차트</text>
+        <rect x="21" y="131" width="226" height="48" rx="5" fill="rgba(194,65,12,.12)" stroke="#c2410c" stroke-width="1.2"/>
+        <text x="134" y="151" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c2410c">비즈니스 플랜 (무료)</text>
+        <text x="134" y="167" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c2410c" opacity=".8">핵심 기능 80% · 제한 없음</text>
+        <rect x="255" y="131" width="244" height="48" rx="5" fill="#180d10" stroke="#5a2010" stroke-width="1"/>
+        <text x="377" y="151" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#ff8c60">엔터프라이즈 플랜</text>
+        <text x="377" y="167" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#ff8c60" opacity=".8">현대차·CJ·롯데·LG 등 도입</text>
+        <text x="21" y="197" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">잡코리아 공고 연동 · 25가지+ 외부 서비스 연동 · 인재풀(TRM) 관리</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">나인하이어 ATS</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">주요 기능</th></tr>
+        <tr><td class="lbl">공고 관리</td><td class="val">채용 홈페이지 빌더 · 공고·지원서 통합</td></tr>
+        <tr><td class="lbl">지원자</td><td class="val">단계별 지원자 추적 · 점수 자동 부여</td></tr>
+        <tr><td class="lbl">면접</td><td class="val">일정 조율 자동화 · 구조화 평가</td></tr>
+        <tr><td class="lbl">분석</td><td class="val">29가지+ 채용 데이터 차트</td></tr>
+        <tr><td class="lbl">연동</td><td class="val">잡코리아 공고 연동 · 외부 서비스 25가지+</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--ats);border-color:rgba(194,65,12,.3);background:rgba(194,65,12,.08)">지원자 추적</span>
+        <span class="tag" style="color:var(--ats);border-color:rgba(194,65,12,.3);background:rgba(194,65,12,.08)">무료 플랜</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">SaaS</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">ninehire.com</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(251,146,60,.4)">🌐</div><div class="pf-step-title">ninehire.com 접속</div><div class="pf-step-sub">별도 서비스<br>회원가입</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(251,146,60,.4)">🆓</div><div class="pf-step-title">무료 플랜 시작</div><div class="pf-step-sub">즉시 이용 가능<br>첫 공고 ~10분</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(251,146,60,.4)">🔗</div><div class="pf-step-title">잡코리아 연동</div><div class="pf-step-sub">잡코리아 공고<br>자동 연동</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(251,146,60,.4)">📈</div><div class="pf-step-title">채용 관리</div><div class="pf-step-sub">지원자 트래킹<br>면접·합격 관리</div></div>
+    </div>
+  </div>
+</div><!-- /ats -->
+
+<!-- 기업러닝 -->
+<div class="view" id="v-lrn">
+  <div class="sh"><div class="sh-bar" style="background:var(--lrn)"></div><span class="sh-title">잡코리아 기업러닝</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/learning" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="210" viewBox="0 0 520 210" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="204" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">서비스 구성</text>
+        <rect x="21" y="35" width="226" height="80" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="134" y="53" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#65a30d">법정 의무교육</text>
+        <text x="134" y="73" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#65a30d" opacity=".8">성희롱 예방 / 장애인 인식</text>
+        <text x="134" y="93" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#65a30d" opacity=".8">고용부 승인 · 전 사업장 필수</text>
+        <rect x="255" y="35" width="244" height="80" rx="6" fill="rgba(101,163,13,.15)" stroke="#65a30d" stroke-width="1.5"/>
+        <text x="377" y="53" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#65a30d">직무·자기계발 강좌</text>
+        <text x="377" y="73" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#65a30d" opacity=".8">전문 강의 6,500개+</text>
+        <text x="377" y="93" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#65a30d" opacity=".8">자기계발 3,000개+ · 매월 200개 추가</text>
+        <text x="21" y="141" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">PC + 모바일 앱 동시 수강 · 계약 후 영업일 3일 내 오픈</text>
+        <text x="21" y="161" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#374151">고객센터: 1577-3250 (평일 09~18시)</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">잡코리아 기업러닝</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">서비스 내용</th></tr>
+        <tr><td class="lbl">법정교육</td><td class="val">고용부 승인 의무교육 전 과목</td></tr>
+        <tr><td class="lbl">직무 학습</td><td class="val">6,500개+ 전문 강의 · 매월 신규</td></tr>
+        <tr><td class="lbl">플랫폼</td><td class="val">PC + 모바일 앱 연동 수강</td></tr>
+        <tr><td class="lbl">오픈</td><td class="val">계약 완료 후 영업일 3일 내</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--lrn);border-color:rgba(101,163,13,.3);background:rgba(101,163,13,.08)">법정 의무교육</span>
+        <span class="tag" style="color:var(--lrn);border-color:rgba(101,163,13,.3);background:rgba(101,163,13,.08)">직무·자기계발</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">HRD 플랫폼</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">PC + 앱</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(132,204,22,.4)">📞</div><div class="pf-step-title">도입 문의</div><div class="pf-step-sub">1577-3250<br>상담 신청</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(132,204,22,.4)">📝</div><div class="pf-step-title">계약</div><div class="pf-step-sub">규모·기간<br>견적 협의</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(132,204,22,.4)">⚡</div><div class="pf-step-title">3일 내 오픈</div><div class="pf-step-sub">임직원 계정<br>일괄 생성</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(132,204,22,.4)">📱</div><div class="pf-step-title">PC·앱 수강</div><div class="pf-step-sub">어디서든<br>학습 가능</div></div>
+    </div>
+  </div>
+</div><!-- /lrn -->
+
+<!-- 인적성 검사 -->
+<div class="view" id="v-ass">
+  <div class="sh"><div class="sh-bar" style="background:var(--ass)"></div><span class="sh-title">인적성 검사 — JOBKOREA ASSESSMENT</span><a class="sh-link" href="https://assessment.jobkorea.co.kr" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="230" viewBox="0 0 520 230" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="224" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">채용 전형 단계 내 검사 적용 위치</text>
+        <rect x="21" y="35" width="106" height="44" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="74" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">서류 전형</text>
+        <text x="133" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">›</text>
+        <rect x="141" y="35" width="130" height="44" rx="6" fill="rgba(192,38,211,.18)" stroke="#c026d3" stroke-width="1.5"/>
+        <text x="206" y="51" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#c026d3">인적성·직종 검사</text>
+        <text x="206" y="69" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c026d3" opacity=".8">스마트A / JAT</text>
+        <text x="277" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">›</text>
+        <rect x="285" y="35" width="96" height="44" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="333" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">면접</text>
+        <text x="387" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">›</text>
+        <rect x="395" y="35" width="104" height="44" rx="6" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="447" y="57" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">최종 합격</text>
+        <rect x="21" y="95" width="144" height="52" rx="6" fill="rgba(192,38,211,.12)" stroke="#c026d3" stroke-width="1.2"/>
+        <text x="93" y="113" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c026d3">스마트A</text>
+        <text x="93" y="133" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c026d3" opacity=".8">직종 맞춤 전문검사</text>
+        <rect x="173" y="95" width="144" height="52" rx="6" fill="rgba(192,38,211,.12)" stroke="#c026d3" stroke-width="1.2"/>
+        <text x="245" y="113" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c026d3">JAT</text>
+        <text x="245" y="133" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c026d3" opacity=".8">종합 인적성 검사</text>
+        <rect x="325" y="95" width="174" height="52" rx="6" fill="rgba(192,38,211,.12)" stroke="#c026d3" stroke-width="1.2"/>
+        <text x="412" y="113" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#c026d3">ORAS</text>
+        <text x="412" y="133" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c026d3" opacity=".8">채용 전 과정 대행</text>
+        <text x="21" y="173" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">모두 별도 문의 후 견적 · assessment.jobkorea.co.kr</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">인적성 검사 3종</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th>상품</th><th>특징</th></tr>
+        <tr><td class="hl" style="color:var(--ass)">스마트A</td><td class="val">직종별 특화 전문 역량 검사</td></tr>
+        <tr><td class="hl" style="color:var(--ass)">JAT</td><td class="val">인지능력·성격·직무적합도 종합</td></tr>
+        <tr><td class="hl" style="color:var(--ass)">ORAS</td><td class="val">채용 공고~최종 합격 전 과정 대행</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--ass);border-color:rgba(192,38,211,.3);background:rgba(192,38,211,.08)">스마트A</span>
+        <span class="tag" style="color:var(--ass);border-color:rgba(192,38,211,.3);background:rgba(192,38,211,.08)">JAT</span>
+        <span class="tag" style="color:var(--ass);border-color:rgba(192,38,211,.3);background:rgba(192,38,211,.08)">ORAS</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">채용 전형 보조</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(232,121,249,.4)">📞</div><div class="pf-step-title">도입 문의</div><div class="pf-step-sub">assessment.<br>jobkorea.co.kr</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(232,121,249,.4)">🧩</div><div class="pf-step-title">검사 설계</div><div class="pf-step-sub">직종·규모 맞춤<br>검사 구성</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(232,121,249,.4)">📝</div><div class="pf-step-title">지원자 응시</div><div class="pf-step-sub">온라인 검사<br>실시</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(232,121,249,.4)">📊</div><div class="pf-step-title">결과 리포트</div><div class="pf-step-sub">적합도 분석<br>보고서 제공</div></div>
+    </div>
+  </div>
+</div><!-- /ass -->
+
+<!-- 배너광고 -->
+<div class="view" id="v-ban">
+  <div class="sh"><div class="sh-bar" style="background:var(--ban)"></div><span class="sh-title">배너광고</span><span class="pb-badge all-b">PC + M · 지면별 다양</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/ad" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="240" viewBox="0 0 520 240" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="234" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">잡코리아 지면 × 배너 위치</text>
+        <rect x="21" y="35" width="278" height="28" rx="4" fill="rgba(244,63,94,.2)" stroke="#f43f5e" stroke-width="1.2"/>
+        <text x="160" y="53" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#f43f5e">메인 최상단 배너 (GNB 하단)</text>
+        <rect x="21" y="71" width="162" height="54" rx="4" fill="#e9ecf2" stroke="#d8dce6" stroke-width="0.8"/>
+        <text x="102" y="101" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">메인 콘텐츠</text>
+        <rect x="191" y="71" width="108" height="54" rx="4" fill="rgba(244,63,94,.12)" stroke="#f43f5e" stroke-width="0.8"/>
+        <text x="245" y="93" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f43f5e">우측 고정 배너</text>
+        <text x="245" y="109" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f43f5e" opacity=".7">스크롤 고정 가능</text>
+        <rect x="307" y="35" width="192" height="90" rx="4" fill="#e9ecf2" stroke="#d8dce6" stroke-width="0.8"/>
+        <text x="403" y="51" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">직무·지역 리스트</text>
+        <rect x="315" y="57" width="176" height="22" rx="3" fill="rgba(244,63,94,.12)" stroke="#f43f5e" stroke-width="0.8"/>
+        <text x="403" y="72" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f43f5e">리스트 상단 배너</text>
+        <rect x="315" y="85" width="176" height="12" rx="2" fill="#d8dce6"/>
+        <rect x="315" y="103" width="176" height="12" rx="2" fill="#d8dce6"/>
+        <text x="21" y="151" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">노출 지면·기간·소재에 따라 맞춤 견적 · 담당자: 상품기획팀 T.02-3466-5480</text>
+        <text x="21" y="171" font-family="Pretendard,sans-serif" font-size="11" fill="#374151">E. [email&#160;protected] · 채용 공고 목적이 아닌 브랜드 인지도 광고에 활용</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">배너광고</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">주요 지면</td><td class="val">메인 상단 · 우측 고정 · 직무/지역 리스트 상단</td></tr>
+        <tr><td class="lbl">목적</td><td class="val">채용 공고 노출이 아닌 <b>기업 브랜드 인지도</b> 광고</td></tr>
+        <tr><td class="lbl">과금 방식</td><td class="val">기간 계약 (CPT) · 노출 보장형</td></tr>
+        <tr><td class="lbl">문의처</td><td class="val">상품기획팀 · T.02-3466-5480<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefeacee4e1ece5e1fcebefa0ede1a0e5fc">[email&#160;protected]</a></td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--ban);border-color:rgba(225,29,72,.3);background:rgba(225,29,72,.08)">디스플레이 광고</span>
+        <span class="tag" style="color:var(--ban);border-color:rgba(225,29,72,.3);background:rgba(225,29,72,.08)">브랜딩</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">메인·서브 지면</span>
+        <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(244,63,94,.4)">📧</div><div class="pf-step-title">담당자 문의</div><div class="pf-step-sub">이메일 또는<br>전화 상담</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(244,63,94,.4)">🗓</div><div class="pf-step-title">지면·기간 협의</div><div class="pf-step-sub">노출 위치·<br>소재 협의</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(244,63,94,.4)">🎨</div><div class="pf-step-title">소재 제작·납품</div><div class="pf-step-sub">사이즈·포맷<br>안내 받아 제작</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(244,63,94,.4)">📡</div><div class="pf-step-title">게재 시작</div><div class="pf-step-sub">계약 기간<br>노출 보장</div></div>
+    </div>
+  </div>
+</div><!-- /ban -->
+
+<!-- 자소서 AI 분석 -->
+<div class="view" id="v-ai">
+  <div class="sh"><div class="sh-bar" style="background:var(--ai)"></div><span class="sh-title">자기소개서 AI 분석</span><a class="sh-link" href="https://www.jobkorea.co.kr/service/company/ai-analytics" target="_blank"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>바로가기</a></div>
+  <div class="pb">
+    <div class="wf-panel">
+      <svg width="520" height="362" viewBox="0 0 520 362" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="356" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+        <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">지원자 관리 (/corp/applicant/list) — 공고 단위 상품 신청 후 활성화</text>
+        <rect x="21" y="35" width="478" height="26" rx="4" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="33" y="48" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#c2c8dc">공고 선택: [백엔드 개발자 모집] ▾</text>
+        <!-- 지원자 1 -->
+        <rect x="21" y="69" width="478" height="56" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="33" y="85" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#111827">홍길동 · 지원일 2025.04.01</text>
+        <text x="33" y="105" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">이력서 보기 | 자기소개서 보기</text>
+        <rect x="363" y="77" width="128" height="30" rx="5" fill="rgba(6,182,212,.22)" stroke="#06b6d4" stroke-width="1.2"/>
+        <text x="427" y="92" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4" font-weight="700">자소서 분석하기 →</text>
+        <!-- 지원자 2 -->
+        <rect x="21" y="133" width="478" height="40" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="33" y="153" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#111827">김영수 · 지원일 2025.04.02</text>
+        <rect x="363" y="142" width="128" height="24" rx="4" fill="#d8dce6"/>
+        <text x="427" y="154" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af">분석 전</text>
+        <!-- AI 분석 결과 -->
+        <rect x="21" y="185" width="478" height="128" rx="7" fill="#091a1f" stroke="#06b6d4" stroke-width="1.4"/>
+        <text x="260" y="207" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4" font-weight="700">AI 분석 결과 — 홍길동</text>
+        <rect x="29"   y="217" width="112" height="80" rx="6" fill="#0d2830"/>
+        <text x="85"  y="247" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4">전체 표절률</text>
+        <text x="85"  y="273" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#06b6d4" font-weight="700">8%</text>
+        <rect x="149" y="217" width="112" height="80" rx="6" fill="#0d2830"/>
+        <text x="205" y="247" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4">지원동기</text>
+        <text x="205" y="273" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#06b6d4" font-weight="700">12%</text>
+        <rect x="269" y="217" width="112" height="80" rx="6" fill="#0d2830"/>
+        <text x="325" y="247" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4">성장과정</text>
+        <text x="325" y="273" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#06b6d4" font-weight="700">3%</text>
+        <rect x="389" y="217" width="110" height="80" rx="6" fill="#0d2830"/>
+        <text x="444" y="247" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#06b6d4">직무역량</text>
+        <text x="444" y="273" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#06b6d4" font-weight="700">5%</text>
+        <text x="21" y="337" text-anchor="start" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">65억 건 이상 DB 비교 · 전체+문항별 표절률 · 지원자 수 무관</text>
+      </svg>
+    </div>
+    <div class="mp">
+      <div class="mp-name">자기소개서 AI 분석</div>
+      
+      <div class="divider"></div>
+      <table class="et">
+        <tr><th colspan="2">노출 정보</th></tr>
+        <tr><td class="lbl">작동 위치</td><td class="val">지원자 관리 화면 내<br>각 지원자 카드에 <b>[자소서 분석하기] 버튼</b></td></tr>
+        <tr><td class="lbl">결과 표시</td><td class="val">전체 표절률 + 문항별 표절률 인라인 표시</td></tr>
+        <tr><td class="lbl">DB 규모</td><td class="val">65억 건 이상 문서 비교 (무하유 AI 제휴)</td></tr>
+        <tr><td class="lbl">적용 단위</td><td class="val">공고 단위 신청 → 해당 공고 전 지원자 분석 가능</td></tr>
+        <tr><td class="lbl">과금</td><td class="val">지원자 수와 무관하게 공고 단위 정액</td></tr>
+      </table>
+    
+      <div class="tags">
+        <span class="tag" style="color:var(--ai);border-color:rgba(8,145,178,.3);background:rgba(8,145,178,.08)">표절률 검사</span>
+        <span class="tag" style="color:var(--ai);border-color:rgba(8,145,178,.3);background:rgba(8,145,178,.08)">문항별 분석</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">65억 건 DB</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">공고 단위</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-wrap">
+    <div class="pf-title">이용 절차</div>
+    <div class="pf-steps">
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(6,182,212,.4)">📋</div><div class="pf-step-title">공고 선택</div><div class="pf-step-sub">공고 리스트에서<br>분석 대상 선택</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(6,182,212,.4)">🛒</div><div class="pf-step-title">상품 신청</div><div class="pf-step-sub">공고 단위<br>결제</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(6,182,212,.4)">👁</div><div class="pf-step-title">지원자 이력서 열람</div><div class="pf-step-sub">자소서 탭에서<br>[분석하기] 클릭</div></div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step"><div class="pf-node" style="border-color:rgba(6,182,212,.4)">📊</div><div class="pf-step-title">결과 확인</div><div class="pf-step-sub">전체·문항별<br>표절률 즉시 표시</div></div>
+    </div>
+  </div>
+</div><!-- /ai -->
+
+</div><!-- /content -->
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const figmaLinks = {
+  ov:    'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4066-39&t=nDdZRwiWffequ6SO-1',
+  main:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-185210&t=nDdZRwiWffequ6SO-11',
+  max:   'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-186210&t=nDdZRwiWffequ6SO-11',
+  part:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-186210&t=nDdZRwiWffequ6SO-11',
+  area:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-186210&t=nDdZRwiWffequ6SO-11',
+  jump:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-186310&t=nDdZRwiWffequ6SO-11',
+  spick: 'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4108-157836&t=nDdZRwiWffequ6SO-11',
+  wpick: 'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4094-307801&t=nDdZRwiWffequ6SO-11',
+  best:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4108-141003&t=nDdZRwiWffequ6SO-11',
+  pos:   'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4111-138272&t=nDdZRwiWffequ6SO-11',
+  pkg:   'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4108-155463&t=nDdZRwiWffequ6SO-11',
+  lrn:   'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4108-157703&t=nDdZRwiWffequ6SO-11',
+  ban:   'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4111-78120&t=nDdZRwiWffequ6SO-1',
+};
+const pages = {
+  ov:    ['전체', '모든 상품의 노출 위치 · 방식 · 이용 절차 · Figma 연결'],
+  main:  ['채용광고 — 메인 노출', 'M 메인 풀배너 + PC 우측 고정 · 노출 위치 · 방식'],
+  max:   ['채용광고 — [MAX] 직무+지역', '직무·지역 리스트 동시 노출 · 7종 · PC + M'],
+  part:  ['채용광고 — 직무 단독', '직무 리스트만 노출 · 7종 · 점프업 부가 포함 · PC + M'],
+  area:  ['채용광고 — 지역 단독', '지역 리스트만 노출 · 직무 단독과 동일 구조 · PC + M'],
+  jump:  ['채용광고 — 점프업', '무료 공고를 리스트 최상단으로 · 3/6/12회/일 · PC + M'],
+  spick: ['스마트픽', 'AI 추천 영역 자동 노출 · 클릭 시만 과금 (CPC) · NEW · PC + M'],
+  wpick: ['원픽', '원픽 전용 공고 영역 · AI 인재 추천 · 합격 시 수수료'],
+  pos:   ['포지션제안', '인재검색 화면 내 포지션 제의 버튼 · 기간 이용권'],
+  pkg:   ['기업회원 패키지', '채용광고 대량 선구매 · 기간 내 공고별 분배 사용'],
+  ats:   ['ATS — 나인하이어', '지원자 추적 시스템 · 무료 플랜 / 엔터프라이즈 · ninehire.com'],
+  lrn:   ['기업러닝', '법정 의무교육 + 직무·자기계발 HRD 플랫폼 · PC·모바일 앱'],
+  ass:   ['인적성 검사', '채용 전형 보조 도구 · 스마트A / JAT / ORAS'],
+  ban:   ['배너광고', '브랜딩 디스플레이 광고 · 메인·서브 지면 · PC + M · 지면별 다양'],
+  best:  ['베스트 채용상품', '공고 리스트 상단 고정 · 직무·지역 기반 추천 노출'],
+  best:  ['베스트 채용상품', '공고 리스트 상단 고정 · 직무·지역 기반 추천 노출'],
+  ai:    ['자소서 AI 분석', '지원자 관리 화면 내 표절률 검사 버튼 · 공고 단위 신청'],
+};
+
+function go(id, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+  document.getElementById('v-' + id).classList.add('on');
+  if (btn) btn.classList.add('on');
+  else {
+    document.querySelectorAll('.ni').forEach(n => {
+      if (n.getAttribute('onclick') === `go('${id}',this)`) n.classList.add('on');
+    });
+  }
+  const [t, s] = pages[id] || ['', ''];
+  document.getElementById('ptitle').textContent = t;
+  document.getElementById('psub').textContent = s;
+  const fl = document.getElementById('figma-btn');
+  if (fl) {
+    fl.href = figmaLinks[id] || figmaLinks['ov'];
+    fl.style.display = ['ats','ass','ai'].includes(id) ? 'none' : '';
+  }
+}
+</script>
+</body>
+</html>
