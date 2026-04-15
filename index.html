@@ -73,7 +73,7 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
   position: fixed; top: 0; left: 210px; right: 0; z-index: 20;
   background: var(--s1); border-bottom: 1px solid var(--bd);
   padding: 13px 28px;
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; gap: 0;
   box-sizing: border-box;
 }
 .topbar h1 { font-size: 16px; font-weight: 700; color: var(--t1); }
@@ -85,7 +85,7 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
   border-radius: 7px; background: rgba(77,126,255,.08);
   text-decoration: none; transition: background .15s;
   display: inline-flex; align-items: center; gap: 6px;
-  line-height: 1; white-space: nowrap; cursor: pointer;
+  line-height: 1; white-space: nowrap; cursor: pointer; height: 34px; box-sizing: border-box;
 }
 .figma-top:hover { background: rgba(77,126,255,.18); }
 
@@ -96,7 +96,8 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
 
 /* ── SECTION HEADER ── */
 .sh {
-  display: flex; align-items: center; gap: 10px;
+  display: none;
+  align-items: center; gap: 10px;
   margin: 0 0 16px;
 }
 .sh-bar { width: 3px; height: 20px; border-radius: 2px; flex-shrink: 0; }
@@ -104,11 +105,11 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
 .sh-sub { margin-left: 4px; display: inline-flex; align-items: center; gap: 4px; }
 .sh-link {
   margin-left: auto; font-size: 13px; font-weight: 600; color: var(--part);
-  padding: 9px 16px; border: 1px solid rgba(77,126,255,.25);
+  padding: 6px 16px; border: 1px solid rgba(77,126,255,.25);
   border-radius: 7px; background: rgba(77,126,255,.08);
   text-decoration: none; transition: background .15s;
   display: inline-flex; align-items: center; gap: 6px;
-  line-height: 1; white-space: nowrap; flex-shrink: 0; cursor: pointer;
+  line-height: 1; white-space: nowrap; flex-shrink: 0; cursor: pointer; height: 34px; box-sizing: border-box;
 }
 .sh-link:hover { background: rgba(77,126,255,.18); }
 
@@ -119,7 +120,7 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
   background: var(--s1); border: 1px solid var(--bd);
   border-radius: 12px;
 }
-.pb + .sh { margin-top: 32px; }
+.pb + .sh { display: none; margin-top: 32px; }
 .wf-panel {
   padding: 20px; border-right: 1px solid var(--bd);
   background: #f8f9fb;
@@ -369,7 +370,8 @@ html { overflow-y: scroll; }
     <p id="psub">노출 위치 · 노출 방식 · 이용 절차 · Figma 연결</p>
   </div>
   <div class="topbar-spacer"></div>
-  <a class="figma-top" id="figma-btn" href="https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4066-39&t=nDdZRwiWffequ6SO-1" target="_blank"><svg width="13" height="20" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M19 28.5C19 25.9804 20.0009 23.5641 21.7825 21.7825C23.5641 20.0009 25.9804 19 28.5 19C31.0196 19 33.4359 20.0009 35.2175 21.7825C36.9991 23.5641 38 25.9804 38 28.5C38 31.0196 36.9991 33.4359 35.2175 35.2175C33.4359 36.9991 31.0196 38 28.5 38C25.9804 38 23.5641 36.9991 21.7825 35.2175C20.0009 33.4359 19 31.0196 19 28.5Z" fill="#1ABCFE"/><path d="M0 47.5C0 44.9804 1.00089 42.5641 2.78249 40.7825C4.56408 39.0009 6.98044 38 9.5 38H19V47.5C19 50.0196 17.9991 52.4359 16.2175 54.2175C14.4359 55.9991 12.0196 57 9.5 57C6.98044 57 4.56408 55.9991 2.78249 54.2175C1.00089 52.4359 0 50.0196 0 47.5Z" fill="#0ACF83"/><path d="M19 0V19H28.5C31.0196 19 33.4359 17.9991 35.2175 16.2175C36.9991 14.4359 38 12.0196 38 9.5C38 6.98044 36.9991 4.56408 35.2175 2.78249C33.4359 1.00089 31.0196 0 28.5 0H19Z" fill="#FF7262"/><path d="M0 9.5C0 12.0196 1.00089 14.4359 2.78249 16.2175C4.56408 17.9991 6.98044 19 9.5 19H19V0H9.5C6.98044 0 4.56408 1.00089 2.78249 2.78249C1.00089 4.56408 0 6.98044 0 9.5Z" fill="#F24E1E"/><path d="M0 28.5C0 31.0196 1.00089 33.4359 2.78249 35.2175C4.56408 36.9991 6.98044 38 9.5 38H19V19H9.5C6.98044 19 4.56408 20.0009 2.78249 21.7825C1.00089 23.5641 0 25.9804 0 28.5Z" fill="#A259FF"/></svg>Figma 열기</a>
+  <div id="topbar-links" style="display:none;align-items:center;gap:8px;margin-right:12px;flex-shrink:0"></div>
+  <a class="figma-top" id="figma-btn" style="margin-left:0" href="https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4066-39&t=nDdZRwiWffequ6SO-1" target="_blank"><svg width="13" height="20" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M19 28.5C19 25.9804 20.0009 23.5641 21.7825 21.7825C23.5641 20.0009 25.9804 19 28.5 19C31.0196 19 33.4359 20.0009 35.2175 21.7825C36.9991 23.5641 38 25.9804 38 28.5C38 31.0196 36.9991 33.4359 35.2175 35.2175C33.4359 36.9991 31.0196 38 28.5 38C25.9804 38 23.5641 36.9991 21.7825 35.2175C20.0009 33.4359 19 31.0196 19 28.5Z" fill="#1ABCFE"/><path d="M0 47.5C0 44.9804 1.00089 42.5641 2.78249 40.7825C4.56408 39.0009 6.98044 38 9.5 38H19V47.5C19 50.0196 17.9991 52.4359 16.2175 54.2175C14.4359 55.9991 12.0196 57 9.5 57C6.98044 57 4.56408 55.9991 2.78249 54.2175C1.00089 52.4359 0 50.0196 0 47.5Z" fill="#0ACF83"/><path d="M19 0V19H28.5C31.0196 19 33.4359 17.9991 35.2175 16.2175C36.9991 14.4359 38 12.0196 38 9.5C38 6.98044 36.9991 4.56408 35.2175 2.78249C33.4359 1.00089 31.0196 0 28.5 0H19Z" fill="#FF7262"/><path d="M0 9.5C0 12.0196 1.00089 14.4359 2.78249 16.2175C4.56408 17.9991 6.98044 19 9.5 19H19V0H9.5C6.98044 0 4.56408 1.00089 2.78249 2.78249C1.00089 4.56408 0 6.98044 0 9.5Z" fill="#F24E1E"/><path d="M0 28.5C0 31.0196 1.00089 33.4359 2.78249 35.2175C4.56408 36.9991 6.98044 38 9.5 38H19V19H9.5C6.98044 19 4.56408 20.0009 2.78249 21.7825C1.00089 23.5641 0 25.9804 0 28.5Z" fill="#A259FF"/></svg>Figma 열기</a>
 </div>
 <div class="content">
 
@@ -574,6 +576,7 @@ html { overflow-y: scroll; }
       </table>
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--main);border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.08)">M 메인 풀배너</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
       </div>
@@ -661,6 +664,8 @@ html { overflow-y: scroll; }
       </table>
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
+        
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
       </div>
     </div>
@@ -776,7 +781,8 @@ html { overflow-y: scroll; }
           </svg>
         </div>
       </div>
-      <div style="margin:16px 0 10px;font-size:11px;font-weight:700;color:var(--t4);border-top:1px solid var(--bd);padding-top:14px">지역 리스트 (PC + M)</div>
+      <div style="display:none">지역 리스트 (PC + M)</div>
+      <div style="margin:16px 0 10px;border-top:1px solid var(--bd);padding-top:14px"></div>
       <div class="wf-row">
         <div class="dev-wrap">
           <div class="dev-lbl">PC 지역 리스트</div>
@@ -846,7 +852,7 @@ html { overflow-y: scroll; }
       </div>
     </div>
     <div class="mp">
-      <div class="mp-name">[MAX] 7종</div>
+      <div class="mp-name">[MAX] 직무 + 지역 동시 노출</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -856,6 +862,7 @@ html { overflow-y: scroll; }
       
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--max);border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.08)">직무+지역 동시</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
@@ -951,7 +958,7 @@ html { overflow-y: scroll; }
       </div>
     </div>
     <div class="mp">
-      <div class="mp-name">직무 단독 (7종)</div>
+      <div class="mp-name">직무·산업 단독 (PC+M)</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -961,6 +968,7 @@ html { overflow-y: scroll; }
       
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--part);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">직무 리스트</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
@@ -1057,7 +1065,7 @@ html { overflow-y: scroll; }
       </div>
     </div>
     <div class="mp">
-      <div class="mp-name">지역 단독 (7종)</div>
+      <div class="mp-name">지역 단독 (PC+M)</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1066,6 +1074,7 @@ html { overflow-y: scroll; }
       </table>
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">지역 리스트</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">7종</span>
@@ -1094,7 +1103,7 @@ html { overflow-y: scroll; }
     <div class="wf-panel">
       <div class="wf-row">
         <div class="dev-wrap">
-          <div class="dev-lbl">공고 리스트 (시간 흐름)</div>
+          <div class="dev-lbl">공고 리스트</div>
           <svg width="520" height="300" viewBox="0 0 520 300" style="overflow:hidden">
         <rect x="3" y="3" width="514" height="294" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
         <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
@@ -1120,7 +1129,7 @@ html { overflow-y: scroll; }
         </div></div>
     </div>
     <div class="mp">
-      <div class="mp-name">점프업 3 / 6 / 12회</div>
+      <div class="mp-name">점프업 (PC+M)</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1131,6 +1140,7 @@ html { overflow-y: scroll; }
       
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--jump);border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.08)">리스트 재배치</span>
         <span class="tag" style="color:var(--area);border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.08)">CPT</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">무료공고 부가</span>
@@ -1196,6 +1206,7 @@ html { overflow-y: scroll; }
         <tr><td class="lbl">구매 방식</td><td class="val">온라인 직접 구매 가능</td></tr>
       </table>
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">추천 공고</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">직무산업별</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">PC + M</span>
@@ -1212,7 +1223,7 @@ html { overflow-y: scroll; }
     <div class="wf-panel">
       <div class="wf-row">
         <div class="dev-wrap">
-          <div class="dev-lbl">Mobile — AI 추천 피드</div>
+          <div class="dev-lbl">Mobile</div>
           <svg width="180" height="360" viewBox="0 0 180 360" style="overflow:hidden">
             <rect x="3" y="3" width="174" height="354" rx="20" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
             <rect x="3" y="3" width="174" height="22" rx="20" fill="#e9ecf2"/>
@@ -1250,7 +1261,7 @@ html { overflow-y: scroll; }
       </div>
     </div>
     <div class="mp">
-      <div class="mp-name">스마트픽</div>
+      <div class="mp-name">스마트픽 — AI 매칭 CPC</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1263,6 +1274,7 @@ html { overflow-y: scroll; }
       </table>
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">AI 매칭</span>
         <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">CPC</span>
         <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">클릭시 과금</span>
@@ -1328,7 +1340,7 @@ html { overflow-y: scroll; }
       </svg>
     </div>
     <div class="mp">
-      <div class="mp-name">원픽 Standard / Premium</div>
+      <div class="mp-name">원픽 — AI 인재 추천 솔루션</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1404,7 +1416,7 @@ html { overflow-y: scroll; }
       </svg>
     </div>
     <div class="mp">
-      <div class="mp-name">포지션제안 이용권</div>
+      <div class="mp-name">포지션제안 서비스</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1541,7 +1553,7 @@ html { overflow-y: scroll; }
       </svg>
     </div>
     <div class="mp">
-      <div class="mp-name">나인하이어 ATS</div>
+      <div class="mp-name">채용 관리 솔루션 — 나인하이어 (ATS)</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1664,7 +1676,7 @@ html { overflow-y: scroll; }
       </svg>
     </div>
     <div class="mp">
-      <div class="mp-name">인적성 검사 3종</div>
+      <div class="mp-name">인적성 검사 — JOBKOREA ASSESSMENT</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1735,6 +1747,7 @@ html { overflow-y: scroll; }
       </table>
     
       <div class="tags">
+        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M · 지면별 다양</span>
         <span class="tag" style="color:var(--ban);border-color:rgba(225,29,72,.3);background:rgba(225,29,72,.08)">디스플레이 광고</span>
         <span class="tag" style="color:var(--ban);border-color:rgba(225,29,72,.3);background:rgba(225,29,72,.08)">브랜딩</span>
         <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">메인·서브 지면</span>
@@ -1832,6 +1845,23 @@ html { overflow-y: scroll; }
 </main>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const pageLinks = {
+  main: [{href:'https://www.jobkorea.co.kr/service/company/option',text:'바로가기'}],
+  max: [{href:'https://www.jobkorea.co.kr/service/company/option',text:'바로가기'}],
+  part: [{href:'https://www.jobkorea.co.kr/service/company/option',text:'바로가기'}],
+  area: [{href:'https://www.jobkorea.co.kr/service/company/option',text:'바로가기'}],
+  jump: [{href:'https://www.jobkorea.co.kr/service/company/option',text:'바로가기'}],
+  spick: [{href:'https://www.jobkorea.co.kr/service/company/cpc',text:'바로가기'}],
+  wpick: [{href:'https://www.jobkorea.co.kr/onepick/intro',text:'Standard'}, {href:'https://www.jobkorea.co.kr/OnePick/PremiumIntro',text:'Premium'}],
+  best: [{href:'https://www.jobkorea.co.kr/service/company/product',text:'바로가기'}],
+  pos: [{href:'https://www.jobkorea.co.kr/service/company/searching',text:'바로가기'}],
+  pkg: [{href:'https://www.jobkorea.co.kr/service/company/package',text:'바로가기'}],
+  ats: [{href:'https://www.ninehire.com',text:'바로가기'}],
+  lrn: [{href:'https://www.jobkorea.co.kr/service/company/learning',text:'바로가기'}],
+  ass: [{href:'https://assessment.jobkorea.co.kr',text:'바로가기'}],
+  ban: [{href:'https://www.jobkorea.co.kr/service/company/ad',text:'바로가기'}],
+  ai: [{href:'https://www.jobkorea.co.kr/service/company/ai-analytics',text:'바로가기'}]
+};
 const figmaLinks = {
   ov:    'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4066-39&t=nDdZRwiWffequ6SO-1',
   main:  'https://www.figma.com/design/3Hdn7woOhPFSE4WfA4gp0x/JK%EC%83%81%ED%92%88-%EB%85%B8%EC%B6%9C-%EA%B5%AC%EB%A7%A4-%EC%97%AC%EC%A0%95?node-id=4120-185210&t=nDdZRwiWffequ6SO-11',
@@ -1880,6 +1910,19 @@ function go(id, btn) {
   const [t, s] = pages[id] || ['', ''];
   document.getElementById('ptitle').textContent = t;
   document.getElementById('psub').textContent = s;
+  const tlc = document.getElementById('topbar-links');
+  if (tlc) {
+    const pls = pageLinks[id];
+    if (pls && pls.length) {
+      tlc.style.display = 'flex';
+      tlc.innerHTML = pls.map(l =>
+        `<a href="${l.href}" target="_blank" class="sh-link" style="margin-left:0;box-sizing:border-box;height:34px"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>${l.text}</a>`
+      ).join('');
+    } else {
+      tlc.style.display = 'none';
+      tlc.innerHTML = '';
+    }
+  }
   const fl = document.getElementById('figma-btn');
   if (fl) {
     fl.href = figmaLinks[id] || figmaLinks['ov'];
