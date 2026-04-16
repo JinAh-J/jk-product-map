@@ -47,9 +47,12 @@ aside {
   z-index: 100;
 }
 .logo {
-  padding: 18px 16px 14px;
-  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  padding: 13px 16px;
+  font-size: 16px; font-weight: 800; text-transform: uppercase;
   color: var(--t3); border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center;
+  box-sizing: border-box; height: 63px;
+  text-decoration: none;
 }
 .grp { padding: 16px 10px 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--t4); }
 .ni {
@@ -77,7 +80,7 @@ main { margin-left: 210px; overflow-y: auto; overflow-x: hidden; display: flex; 
   box-sizing: border-box;
 }
 .topbar h1 { font-size: 16px; font-weight: 700; color: var(--t1); }
-.topbar p  { font-size: 13px; color: var(--t3); margin-top: 1px; }
+.topbar p  { font-size: 13px; color: var(--t3); margin-top: 1px; display: none; }
 .topbar-spacer { flex: 1; }
 .figma-top {
   font-size: 13px; font-weight: 600; color: var(--part);
@@ -296,7 +299,7 @@ html { overflow-y: scroll; }
 
 <!-- ══ SIDEBAR ══ -->
 <aside>
-  <div class="logo">JK Product Map</div>
+  <a class="logo" href="#" onclick="go('ov',null);return false;">JK Product Map</a>
 
   <div class="grp">개요</div>
   <button class="ni on" onclick="go('ov',this)">
@@ -352,7 +355,7 @@ html { overflow-y: scroll; }
     <span class="dot" style="background:var(--lrn)"></span> 기업러닝
   </button>
   <button class="ni" onclick="go('ass',this)">
-    <span class="dot" style="background:var(--ass)"></span> 인적성 검사
+    <span class="dot" style="background:var(--ass)"></span> 스마트A · JAT · JRS
   </button>
   <button class="ni" onclick="go('ban',this)">
     <span class="dot" style="background:var(--ban)"></span> 배너광고
@@ -367,7 +370,7 @@ html { overflow-y: scroll; }
 <div class="topbar">
   <div>
     <h1 id="ptitle">전체</h1>
-    <p id="psub">노출 위치 · 노출 방식 · 이용 절차 · Figma 연결</p>
+    <p id="psub" style="display:none">노출 위치 · 노출 방식 · 이용 절차 · Figma 연결</p>
   </div>
   <div class="topbar-spacer"></div>
   <div id="topbar-links" style="display:none;align-items:center;gap:8px;margin-right:12px;flex-shrink:0"></div>
@@ -386,36 +389,36 @@ html { overflow-y: scroll; }
 
   <div class="overview-card" onclick="go('main',null)" style="border-top-color:var(--main)">
     <div class="ov-icon">📢</div>
-    <div class="ov-name">메인 노출 광고</div>
-    <div class="ov-sub">홈 최상단 풀배너 노출<br>프리미어·VVIP·VIP·Excellent 4종</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--main)"></span>CPT · 기간 과금 · M 풀배너 + PC 고정</div>
+    <div class="ov-name">메인 노출</div>
+    <div class="ov-sub">가장 광고 효과가 좋은 위치<br>프리미어·FirstVVIP·VIP·Excellent</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--main)"></span>CPT · 기간 과금 · 4종</div>
   </div>
 
   <div class="overview-card" onclick="go('max',null)" style="border-top-color:var(--max)">
     <div class="ov-icon">🎯</div>
     <div class="ov-name">[MAX] 직무+지역</div>
-    <div class="ov-sub">직무 리스트 + 지역 리스트 동시 노출<br>7종 · 가장 넓은 도달 범위</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--max)"></span>CPT · 7종 · 직무+지역 동시</div>
+    <div class="ov-sub">직무 리스트 + 지역 리스트<br>동시 노출</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--max)"></span>CPT · 기간 과금 · 7종</div>
   </div>
 
   <div class="overview-card" onclick="go('part',null)" style="border-top-color:var(--part)">
     <div class="ov-icon">📋</div>
     <div class="ov-name">직무 단독</div>
-    <div class="ov-sub">특정 직종 구직자 집중 노출<br>7종 · 점프업 부가 포함</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--part)"></span>CPT · 직무 리스트만</div>
+    <div class="ov-sub">직무·산업 리스트 노출<br>점프업 부가 포함</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--part)"></span>CPT · 기간 과금 · 7종 · 직무 리스트만</div>
   </div>
 
   <div class="overview-card" onclick="go('area',null)" style="border-top-color:var(--area)">
     <div class="ov-icon">📍</div>
     <div class="ov-name">지역 단독</div>
-    <div class="ov-sub">근무지 기반 지역 리스트 노출<br>직무 단독과 동일 구조·가격</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--area)"></span>CPT · 지역 리스트만</div>
+    <div class="ov-sub">지역 리스트 노출<br>직무 단독과 동일 구조·가격</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--area)"></span>CPT · 기간 과금 · 7종 · 지역 리스트만</div>
   </div>
 
   <div class="overview-card" onclick="go('jump',null)" style="border-top-color:var(--jump)">
     <div class="ov-icon">⬆️</div>
     <div class="ov-name">점프업</div>
-    <div class="ov-sub">무료 공고를 리스트 최상단으로<br>하루 3·6·12회 분산 재배치</div>
+    <div class="ov-sub">공고를 리스트 상단으로<br>3·6·12회</div>
     <div class="ov-trait"><span class="ov-dot" style="background:var(--jump)"></span>CPT · 부가 단독 이용 가능</div>
   </div>
 
@@ -428,29 +431,29 @@ html { overflow-y: scroll; }
   <div class="overview-card" onclick="go('best',null)" style="border-top-color:#f59e0b">
     <div class="ov-icon">⭐</div>
     <div class="ov-name">베스트 채용상품</div>
-    <div class="ov-sub">공고 리스트 상단 고정 노출<br>직무·지역 기반 추천 알고리즘</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:#f59e0b"></span>CPT · 리스트 상단 고정</div>
+    <div class="ov-sub">추천 상품 제공<br><span style="visibility:hidden">-</span></div>
+    <div class="ov-trait"><span class="ov-dot" style="background:#f59e0b"></span>직무 채용정보 · 점프업</div>
   </div>
 
   <div class="overview-card" onclick="go('spick',null)" style="border-top-color:var(--spick)">
     <div class="ov-icon">🤖</div>
     <div class="ov-name">스마트픽</div>
-    <div class="ov-sub">AI 매칭 기반 추천 영역 자동 노출<br>클릭 발생 시만 과금</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--spick)"></span>CPC · AI 매칭 · NEW</div>
+    <div class="ov-sub">자주 방문하는 곳에 집중 노출<br>클릭 발생 시만 과금</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--spick)"></span>CPC</div>
   </div>
 
   <div class="overview-card" onclick="go('wpick',null)" style="border-top-color:var(--wpick)">
     <div class="ov-icon">✨</div>
     <div class="ov-name">원픽</div>
-    <div class="ov-sub">원픽 전용 공고 + AI 인재 추천<br>합격 시 수수료 · 퇴사 보장 80%</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--wpick)"></span>성과형 · Standard / Premium</div>
+    <div class="ov-sub">원픽 전용 공고 · fit한 인재 추천<br>합격 시 수수료</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--wpick)"></span>Standard · Premium</div>
   </div>
 
   <div class="overview-card" onclick="go('pos',null)" style="border-top-color:var(--pos)">
     <div class="ov-icon">🔍</div>
     <div class="ov-name">포지션제안</div>
-    <div class="ov-sub">인재DB 검색 + 직접 제의<br>인재검색 화면 내 버튼 활성화</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--pos)"></span>기간제 이용권 · 5종</div>
+    <div class="ov-sub">이력서 전체 내용 확인 가능<br>[포지션 제안] 발송 가능</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--pos)"></span>건수 단위 구매</div>
   </div>
 
 </div>
@@ -462,14 +465,14 @@ html { overflow-y: scroll; }
   <div class="overview-card" onclick="go('pkg',null)" style="border-top-color:var(--pkg)">
     <div class="ov-icon">📦</div>
     <div class="ov-name">기업회원 패키지</div>
-    <div class="ov-sub">채용광고 대량 선구매<br>기간 내 공고별 분배 사용</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--pkg)"></span>상담 후 견적 · 수시채용 적합</div>
+    <div class="ov-sub">기간 내 건수별 차감<br><span style="visibility:hidden">-</span></div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--pkg)"></span>핵심 · 추천 · 헤드라인 · 점프업</div>
   </div>
 
   <div class="overview-card" onclick="go('ats',null)" style="border-top-color:var(--ats)">
     <div class="ov-icon">🗂️</div>
     <div class="ov-name">ATS · 나인하이어</div>
-    <div class="ov-sub">지원자 추적 시스템<br>무료 플랜 / 엔터프라이즈</div>
+    <div class="ov-sub">채용 관리 솔루션<br>후보자 모집 · 지원자 관리 · 평가 등</div>
     <div class="ov-trait"><span class="ov-dot" style="background:var(--ats)"></span>SaaS · ninehire.com</div>
   </div>
 
@@ -482,9 +485,9 @@ html { overflow-y: scroll; }
 
   <div class="overview-card" onclick="go('ass',null)" style="border-top-color:var(--ass)">
     <div class="ov-icon">🧠</div>
-    <div class="ov-name">인적성 검사</div>
-    <div class="ov-sub">스마트A 직종전문 · JAT 종합<br>채용 전형 보조 도구</div>
-    <div class="ov-trait"><span class="ov-dot" style="background:var(--ass)"></span>문의 후 견적 · 2종</div>
+    <div class="ov-name">스마트A · JAT · JRS</div>
+    <div class="ov-sub">스마트A 직종전문 · JAT 종합 인적성<br>JRS 채용대행솔루션</div>
+    <div class="ov-trait"><span class="ov-dot" style="background:var(--ass)"></span>채용 전형 보조 도구</div>
   </div>
 
   <div class="overview-card" onclick="go('ban',null)" style="border-top-color:var(--ban)">
@@ -1676,7 +1679,7 @@ html { overflow-y: scroll; }
       </svg>
     </div>
     <div class="mp">
-      <div class="mp-name">인적성 검사 — JOBKOREA ASSESSMENT</div>
+      <div class="mp-name">스마트A · JAT · JRS</div>
       
       <div class="divider"></div>
       <table class="et">
@@ -1879,22 +1882,22 @@ const figmaLinks = {
 };
 const pages = {
   ov:    ['전체', '모든 상품의 노출 위치 · 방식 · 이용 절차 · Figma 연결'],
-  main:  ['채용광고 — 메인 노출', 'M 메인 풀배너 + PC 우측 고정 · 노출 위치 · 방식'],
-  max:   ['채용광고 — [MAX] 직무+지역', '직무·지역 리스트 동시 노출 · 7종 · PC + M'],
-  part:  ['채용광고 — 직무 단독', '직무 리스트만 노출 · 7종 · 점프업 부가 포함 · PC + M'],
-  area:  ['채용광고 — 지역 단독', '지역 리스트만 노출 · 직무 단독과 동일 구조 · PC + M'],
-  jump:  ['채용광고 — 점프업', '무료 공고를 리스트 최상단으로 · 3/6/12회/일 · PC + M'],
-  spick: ['스마트픽', 'AI 추천 영역 자동 노출 · 클릭 시만 과금 (CPC) · NEW · PC + M'],
-  wpick: ['원픽', '원픽 전용 공고 영역 · AI 인재 추천 · 합격 시 수수료'],
-  pos:   ['포지션제안', '인재검색 화면 내 [포지션제안] 버튼 · 건수형 / 기간형 이용권'],
-  pkg:   ['기업회원 패키지', '채용광고 대량 선구매 · 기간 내 공고별 분배 사용'],
-  ats:   ['ATS — 나인하이어', '지원자 추적 시스템 · 무료 플랜 / 엔터프라이즈 · ninehire.com'],
-  lrn:   ['기업러닝', '법정 의무교육 + 직무·자기계발 HRD 플랫폼 · PC·모바일 앱'],
-  ass:   ['인적성 검사', '채용 전형 보조 도구 · 스마트A / JAT / ORAS'],
-  ban:   ['배너광고', '브랜딩 디스플레이 광고 · 메인·서브 지면 · PC + M · 지면별 다양'],
-  best:  ['베스트 채용상품', '직무산업별 추천 채용공고 · 공고 끌어올리기 · 구직자 관심 직종 기반 노출'],
-  best:  ['베스트 채용상품', '직무산업별 추천 채용공고 · 공고 끌어올리기 · 구직자 관심 직종 기반 노출'],
-  ai:    ['자소서 AI 분석', '지원자 관리 화면 내 표절률 검사 버튼 · 공고 단위 신청'],
+  main:  ['채용광고 — 메인 노출', '가장 광고 효과가 좋은 위치 · 프리미어·FirstVVIP·VIP·Excellent'],
+  max:   ['채용광고 — [MAX] 직무+지역', '직무 리스트 + 지역 리스트 · 동시 노출'],
+  part:  ['채용광고 — 직무 단독', '직무·산업 리스트 노출 · 점프업 부가 포함'],
+  area:  ['채용광고 — 지역 단독', '지역 리스트 노출 · 직무 단독과 동일 구조·가격'],
+  jump:  ['채용광고 — 점프업', '공고를 리스트 상단으로 · 3·6·12회'],
+  spick: ['스마트픽', '자주 방문하는 곳에 집중 노출 · 클릭 발생 시만 과금'],
+  wpick: ['원픽', '원픽 전용 공고 · fit한 인재 추천 · 합격 시 수수료'],
+  pos:   ['포지션제안', '이력서 전체 내용 확인 가능 · [포지션 제안] 발송 가능'],
+  pkg:   ['기업회원 패키지', '기간 내 건수별 차감'],
+  ats:   ['ATS — 나인하이어', '채용 관리 솔루션 · 후보자 모집 · 지원자 관리 · 평가 등'],
+  lrn:   ['기업러닝', '법정 의무교육 + 직무 학습 · 기업용 HRD 스마트러닝'],
+  ass:   ['스마트A · JAT · JRS', '채용 전형 보조 도구'],
+  ban:   ['배너광고', '브랜딩 목적 디스플레이 광고 · 메인·서브 지면 노출'],
+  best:  ['베스트 채용상품', '추천 상품 제공'],
+  best:  ['베스트 채용상품', '추천 상품 제공'],
+  ai:    ['자소서 AI 분석', '65억 건 DB 기반 표절률 검사 · 문항별 유사도 분석 리포트'],
 };
 
 function go(id, btn) {
@@ -1915,6 +1918,7 @@ function go(id, btn) {
     const pls = pageLinks[id];
     if (pls && pls.length) {
       tlc.style.display = 'flex';
+      tlc.style.marginRight = ['ats','ass','ai'].includes(id) ? '0' : '12px';
       tlc.innerHTML = pls.map(l =>
         `<a href="${l.href}" target="_blank" class="sh-link" style="margin-left:0;box-sizing:border-box;height:34px"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:4px;flex-shrink:0"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>${l.text}</a>`
       ).join('');
@@ -1927,6 +1931,7 @@ function go(id, btn) {
   if (fl) {
     fl.href = figmaLinks[id] || figmaLinks['ov'];
     fl.style.display = ['ats','ass','ai'].includes(id) ? 'none' : '';
+    fl.style.marginLeft = ['ats','ass','ai'].includes(id) ? '0' : '';
   }
 }
 </script>
