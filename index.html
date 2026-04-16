@@ -334,14 +334,14 @@ html { overflow-y: scroll; }
   </button>
   <button class="ni" onclick="go('spick',this)">
     <span class="dot" style="background:var(--spick)"></span> 스마트픽
-    <span class="cnt">NEW</span>
+    <span class="cnt" style="display:none">NEW</span>
   </button>
   <button class="ni" onclick="go('wpick',this)">
     <span class="dot" style="background:var(--wpick)"></span> 원픽
   </button>
   <button class="ni" onclick="go('pos',this)">
     <span class="dot" style="background:var(--pos)"></span> 포지션제안
-    <span class="cnt">5종</span>
+    <span class="cnt" style="display:none">5종</span>
   </button>
 
   <div class="grp">솔루션</div>
@@ -1175,22 +1175,21 @@ html { overflow-y: scroll; }
     <div class="wf-panel">
       <div class="wf-row">
         <div class="dev-wrap">
-          <div class="dev-lbl">공고 리스트</div>
-          <svg width="520" height="280" viewBox="0 0 520 280" style="overflow:hidden">
-        <rect x="3" y="3" width="514" height="274" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
+          <div class="dev-lbl">베스트 채용상품 페이지</div>
+          <svg width="520" height="240" viewBox="0 0 520 240" style="overflow:hidden">
+        <rect x="3" y="3" width="514" height="234" rx="8" fill="#f8f9fb" stroke="#d8dce6" stroke-width="1.5"/>
         <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
-        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">공고 리스트 내 베스트 채용상품 노출 위치</text>
-        <!-- 베스트 영역 -->
-        <rect x="21" y="35" width="478" height="52" rx="5" fill="rgba(245,158,11,.18)" stroke="#f59e0b" stroke-width="1.5"/>
-        <text x="33" y="55" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#f59e0b">⭐ 베스트 채용상품 — 리스트 상단 고정</text>
-        <text x="33" y="75" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f59e0b" opacity=".8">직무·지역 기반 추천 · 구직자 관심 공고 우선 노출</text>
-        <!-- 일반 공고 리스트 -->
-        <rect x="21" y="97" width="478" height="22" rx="3" fill="#e9ecf2"/>
-        <rect x="21" y="125" width="478" height="22" rx="3" fill="#e9ecf2"/>
-        <rect x="21" y="153" width="478" height="22" rx="3" fill="#e9ecf2"/>
-        <rect x="21" y="181" width="478" height="22" rx="3" fill="#e9ecf2"/>
-        <line x1="21" y1="219" x2="499" y2="219" stroke="#e2e6ee" stroke-width="1"/>
-        <text x="21" y="239" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">공고 리스트 상단 고정 · CPT 과금 · 직무·지역 페이지 동시 노출</text>
+        <text x="260" y="14" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">잡코리아 베스트 채용상품 페이지 구성</text>
+        <!-- 탭 2개 -->
+        <rect x="21" y="35" width="228" height="32" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="135" y="51" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">직무산업 채용정보</text>
+        <rect x="257" y="35" width="242" height="32" rx="5" fill="#e9ecf2" stroke="#d8dce6" stroke-width="1"/>
+        <text x="378" y="51" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">공고 끌어올리기</text>
+        <!-- 탭 설명 타이틀 -->
+        <text x="21" y="87" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#f59e0b">직무산업 채용정보</text>
+        <text x="21" y="111" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">직무·산업별 채용정보 상단에 우선 노출</text>
+        <text x="21" y="145" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#f59e0b">공고 끌어올리기</text>
+        <text x="21" y="169" dominant-baseline="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#6b7280">공고리스트 상위로 올려주는 상품</text>
       </svg>
         </div>
       </div>
@@ -1199,20 +1198,15 @@ html { overflow-y: scroll; }
       <div class="mp-name">베스트 채용상품</div>
       <div class="divider"></div>
       <table class="et">
-        <tr><th colspan="2">서비스 구성</th></tr>
-        <tr><td class="lbl">베스트 채용상품</td><td class="val">직무산업별 추천 채용공고 모음 · 구직자 관심 직종 기반 노출</td></tr>
-        <tr><td class="lbl">직무산업 채용정보</td><td class="val">직무·산업별 채용 트렌드 및 추천 공고</td></tr>
-        <tr><td class="lbl">공고 끌어올리기</td><td class="val">등록 공고를 베스트 영역 상단으로 노출</td></tr>
-        <tr><th colspan="2">노출 정보</th></tr>
-        <tr><td class="lbl">노출 위치</td><td class="val">잡코리아 베스트 채용상품 페이지</td></tr>
-        <tr><td class="lbl">노출 방식</td><td class="val">구직자 관심 직무·산업 기반 추천</td></tr>
-        <tr><td class="lbl">구매 방식</td><td class="val">온라인 직접 구매 가능</td></tr>
+        <tr><th colspan="2">탭 구성</th></tr>
+        <tr style="display:none"><td class="lbl">베스트 채용상품</td><td class="val"></td></tr>
+        <tr><td class="lbl" style="white-space:nowrap;padding-right:12px">직무산업 채용정보</td><td class="val">직무·산업별 채용정보 상단에 우선 노출</td></tr>
+        <tr><td class="lbl" style="white-space:nowrap;padding-right:12px">공고 끌어올리기</td><td class="val">공고리스트 상위로 올려주는 상품</td></tr>
       </table>
       <div class="tags">
-        <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
         <span class="tag" style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">추천 공고</span>
-        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">직무산업별</span>
-        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">PC + M</span>
+        <span class="tag" style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">직무산업별</span>
+        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">온라인 구매</span>
       </div>
     </div>
   </div>
@@ -1251,7 +1245,7 @@ html { overflow-y: scroll; }
         <rect x="3" y="3" width="514" height="20" rx="8" fill="#e9ecf2"/>
         <text x="260" y="16" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#9ca3af" font-weight="600">CPC 과금 흐름</text>
         <rect x="21" y="35" width="478" height="38" rx="6" fill="rgba(37,99,235,.1)" stroke="#2563eb" stroke-width="1.2"/>
-        <text x="260" y="59" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb">AI → 적합 구직자 자동 노출</text>
+        <text x="260" y="59" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb">타겟에게 주목도 있게 노출</text>
         <text x="260" y="89" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#9ca3af">↓</text>
         <rect x="21" y="97" width="478" height="38" rx="6" fill="rgba(37,99,235,.1)" stroke="#2563eb" stroke-width="1.2"/>
         <text x="260" y="121" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#2563eb">클릭 → 비용 차감</text>
@@ -1269,19 +1263,14 @@ html { overflow-y: scroll; }
       <div class="divider"></div>
       <table class="et">
         <tr><th colspan="2">노출 정보</th></tr>
-        <tr><td class="lbl">노출 위치</td><td class="val"><b>AI 추천 영역</b> — 메인·직무·지역 등 전 지면의 AI 피드</td></tr>
-        <tr><td class="lbl">노출 방식</td><td class="val">AI가 공고↔구직자 매칭 후 자동 노출<br>구직자 관심사·경력 기반 타겟</td></tr>
-        <tr><td class="lbl">과금 방식</td><td class="val">노출은 무료 · <b>클릭 시만 비용</b> 차감 (CPC)</td></tr>
-        <tr><td class="lbl">예산 통제</td><td class="val">일 예산 설정 → 초과 시 자동 노출 중단</td></tr>
-        <tr><td class="lbl">vs CPT</td><td class="val">기간 과금 아님 · 성과(클릭) 기반이라 낭비 없음</td></tr>
+        <tr><td class="lbl">노출 위치</td><td class="val">취업과 이직을 준비하는 고객이 자주 방문하는 곳에 집중 노출</td></tr>
+        <tr><td class="lbl">노출 방식</td><td class="val">유저의 행동 데이터 기반 fit한 타겟에게 노출</td></tr>
+        <tr><td class="lbl">과금 방식</td><td class="val">유저가 공고 클릭 시만 비용 차감 (CPC)</td></tr>
       </table>
     
       <div class="tags">
         <span class="tag" style="color:#b07dff;border-color:rgba(176,125,255,.3);background:rgba(176,125,255,.12);font-weight:600">PC + M</span>
-        <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">AI 매칭</span>
         <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">CPC</span>
-        <span class="tag" style="color:var(--spick);border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.08)">클릭시 과금</span>
-        <span class="tag" style="color:var(--t4);border-color:rgba(107,114,128,.3);background:rgba(107,114,128,.08)">NEW</span>
       </div>
     </div>
   </div>
@@ -1895,8 +1884,8 @@ const pages = {
   lrn:   ['기업러닝', '법정 의무교육 + 직무 학습 · 기업용 HRD 스마트러닝'],
   ass:   ['스마트A · JAT · JRS', '채용 전형 보조 도구'],
   ban:   ['배너광고', '브랜딩 목적 디스플레이 광고 · 메인·서브 지면 노출'],
-  best:  ['베스트 채용상품', '추천 상품 제공'],
-  best:  ['베스트 채용상품', '추천 상품 제공'],
+  best:  ['베스트 채용상품', '직무·산업별 추천 채용공고 · 구직자 관심 직종 기반 노출'],
+  best:  ['베스트 채용상품', '직무·산업별 추천 채용공고 · 구직자 관심 직종 기반 노출'],
   ai:    ['자소서 AI 분석', '65억 건 DB 기반 표절률 검사 · 문항별 유사도 분석 리포트'],
 };
 
